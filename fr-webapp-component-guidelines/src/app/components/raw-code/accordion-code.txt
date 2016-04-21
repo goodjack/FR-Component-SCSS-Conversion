@@ -1,0 +1,101 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Accordion, AccordionItem, Heading, Text} from 'uniqlo-ui';
+
+ReactDOM.render(
+  <div>
+    <Accordion expandMultipleTab>
+      <AccordionItem expandTab
+        showIcon="ActionMinus"
+        hideIcon="ActionPlus"
+      >
+        <Heading type="h3" headingText="section1" />
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+          in reprehenderit in voluptate velit esse cillum dolore eu
+          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum
+        </Text>
+      </AccordionItem>
+      <AccordionItem expandTab
+        showIcon="ActionMinus"
+        hideIcon="ActionPlus"
+      >
+        <Heading type="h3" headingText="section2" />
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+          in reprehenderit in voluptate velit esse cillum dolore eu
+          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum
+        </Text>
+      </AccordionItem>
+      <AccordionItem
+        showIcon="ActionMinus"
+        hideIcon="ActionPlus"
+      >
+        <Heading type="h3" headingText="section3" />
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+          in reprehenderit in voluptate velit esse cillum dolore eu
+          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum
+        </Text>
+      </AccordionItem>
+    </Accordion>
+
+    <Accordion>
+      <AccordionItem expandTab
+        showIcon="ActionMinus"
+        hideIcon="ActionPlus"
+      >
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+          in reprehenderit in voluptate velit esse cillum dolore eu
+          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum
+        </Text>
+      </AccordionItem>
+      <AccordionItem expandTab
+        showIcon="ActionMinus"
+        hideIcon="ActionPlus"
+      >
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+          in reprehenderit in voluptate velit esse cillum dolore eu
+          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum
+        </Text>
+      </AccordionItem>
+      <AccordionItem
+        showIcon="ActionMinus"
+        hideIcon="ActionPlus"
+      >
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+          in reprehenderit in voluptate velit esse cillum dolore eu
+          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum
+        </Text>
+      </AccordionItem>
+    </Accordion>
+  </div>,
+   document.body
+);

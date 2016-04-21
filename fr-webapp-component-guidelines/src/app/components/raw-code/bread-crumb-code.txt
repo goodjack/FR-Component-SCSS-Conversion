@@ -1,0 +1,5 @@
+<BreadCrumbs separator="/" style={styles.rootStyle}>
+   <BreadCrumb text="男裝" link="http://uniqlo.com" target="_blank" style={styles.link} hoverStyle={styles.hovered}></BreadCrumb>
+   <BreadCrumb text="特別企劃" link="http://uniqlo.com" target="_blank" style={styles.link} hoverStyle={styles.hovered} ></BreadCrumb>
+   <BreadCrumb text="期間限定特價" style={styles.lastItem} />
+</BreadCrumbs>

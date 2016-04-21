@@ -1,0 +1,6 @@
+<List orientation="horizontal">
+  <ListItem link="http://google.com" leftIcon="Favorite" label="Sent mail" />
+  <ListItem link="http://google.com" leftIcon="Star" label="Drafts" />
+  <ListItem link="http://google.com" leftIcon="Favorite" label="Drafts" />
+  <ListItem link="http://google.com" leftIcon="Star" label="Drafts" />
+</List>

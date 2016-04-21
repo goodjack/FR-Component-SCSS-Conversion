@@ -1,0 +1,3 @@
+// Text Input Group Usage
+<TextInputGroup buttonStyle={{padding: '9px'}} onTouchTap={this._getTextValue}
+  label="Click me" labelStyle={{display: 'block'}} hintText=" Enter your name" />

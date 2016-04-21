@@ -1,0 +1,14 @@
+// Heading Usage
+<div>
+  <Heading type="h1" headingText="Hello World" />
+  <br/>
+  <Heading type="h2" headingText="Hello World" style={{color: 'red'}} />
+  <br/>
+  <Heading type="h3" headingText="Hello World" />
+  <br/>
+  <Heading type="h4" headingText="Hello World" />
+  <br/>
+  <Heading type="h5" headingText="Hello World" />
+  <br/>
+  <Heading type=h6" headingText="Hello World" />
+</div>

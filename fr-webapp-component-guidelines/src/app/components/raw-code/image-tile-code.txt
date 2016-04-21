@@ -1,0 +1,4 @@
+//IMAGETILE USAGE
+<ImageTile source= "https://facebook.github.io/react/img/logo_og.png" link= "#" tileSize="large"/>
+<ImageTile source= "http://www.w3schools.com/images/w3schools_green.jpg" link= "#" tileSize="small"/>
+<ImageTile source= "https://facebook.github.io/react/img/logo_og.png" link= "#"/>

@@ -1,0 +1,15 @@
+ <RadioButton
+  value="light"
+  label="prepare for light speed"
+  style={{marginBottom:16}} />
+
+<RadioButton
+  style = {{marginBottom: '16px'}}
+  value = "20"
+  label="light speed too slow"
+  labelPosition="left" />
+<RadioButton
+  style = {{marginBottom: '16px'}}
+  value = "20"
+  label="light speed too slow"
+  labelStyle={{color: 'blue'}} />

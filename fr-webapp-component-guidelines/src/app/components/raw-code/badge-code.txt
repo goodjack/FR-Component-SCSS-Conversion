@@ -1,0 +1,66 @@
+<Badge
+  number={24}
+  badgeStyle={{borderRadius: 0}}
+/>
+<br />
+<br />
+<Badge
+  number={2}
+/>
+<br />
+<br />
+<Badge
+  number={130}
+  badgeStyle={{backgroundColor: 'blue'}}
+  maxLimit={99}
+>
+  <IconButton
+    iconclassName="muidocs-icon-custom-github"
+    style={{backgroundColor: 'green'}}
+   />
+</Badge>
+<br />
+<br />
+<Badge
+  number={1400}
+  mxLimit={999}
+  position="left"
+  badgeStyle={{backgroundColor: '#f00'}}
+>
+  <Label
+      text="Label Text that is going to have a very long text"
+    background="black"
+    foreground="white"
+    style={{margin: 0}}
+  />
+</Badge>
+<br />
+<br />
+<Badge
+  number={10}
+  position="center"
+  maxLimit={99}
+  badgeStyle={{backgroundColor: '#f00'}}
+>
+  <Label
+    text="Label Text that is going to have a very long text"
+    background="black"
+    foreground="white"
+    style={{margin: 0}}
+ />
+</Badge>
+<br />
+<br />
+<Badge
+  number={1400}
+  position="right"
+  maxLimit={2000}
+  badgeStyle={{backgroundColor: 'green', color: 'white', width: 30, height: 30, padding: 0}}
+>
+  <Label
+    text="Label Text that is going to have a very long text"
+    background="black"
+    foreground="white"
+    style={{margin: 0}}
+ />
+</Badge>

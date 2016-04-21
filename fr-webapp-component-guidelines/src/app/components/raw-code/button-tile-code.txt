@@ -1,0 +1,13 @@
+<div>
+<ButtonTile imageSrc="https://facebook.github.io/react/img/logo_og.png" tileSize="large">
+  <TileButton title="WOMEN" link="/women" color="#fc0001" targetwindow="_blank" />
+  <TileButton title="MEN" link="/women" color="#fc0001" targetwindow="_blank" />
+  <TileButton title="CHILD" link="/women" color="#fc0001" targetwindow="_blank" />
+</ButtonTile>
+<ButtonTile imageSrc="https://facebook.github.io/react/img/logo_og.png" tileSize="small">
+  <TileButton title="WOMEN" link="/women" color="#fc0001" targetwindow="_blank" />
+  <TileButton title="MEN" link="/men" color="#010082" targetwindow="_blank" />
+  <TileButton title="KIDS" link="/kids" color="#50b4f0" targetwindow="_blank" />
+  <TileButton title="BABY" link="/baby" color="#95c904" targetwindow="_blank" />
+</ButtonTile>
+</div>

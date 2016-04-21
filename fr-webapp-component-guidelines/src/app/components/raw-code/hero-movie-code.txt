@@ -1,0 +1,6 @@
+// HeroMovie component usage
+<HeroMovie
+  imageSrc="images/heroMovie.jpg"
+  videoId="e0SzgsoEh54" text="PlayIcon" iconSrc="images/play_icon.png"
+  imageTitle="imageAltText"
+/>

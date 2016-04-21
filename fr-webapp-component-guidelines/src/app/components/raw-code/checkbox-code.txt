@@ -1,0 +1,24 @@
+<CheckBox
+  name="checkboxName1"
+  value="checkboxValue1"
+  label="went for a run today"/>
+
+<CheckBox
+  name="checkboxName2"
+  value="checkboxValue2"
+  label="fed the dog"
+  defaultChecked={true}/>
+
+<CheckBox
+  name="checkboxName3"
+  value="checkboxValue3"
+  label="built a house on the moon"
+  disabled={true}/>
+
+<CheckBox
+  label="label1"
+  onCheck={this.handleCheck}
+  labelStyle={{color: 'red'}}
+  value="checkboxValue1"
+  labelPosition="left"
+  name="name" />

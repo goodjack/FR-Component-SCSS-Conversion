@@ -1,0 +1,23 @@
+// SearchBox Usage
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {SearchBox} from 'uniqlo-ui';
+
+ReactDOM.render(
+  <div>
+    <SearchBox
+      buttonType="iconButton"
+      expand={true}
+      searchIcon="ActionSearch"
+      closeIcon="CloseIcon"
+      onTouchTap={this.getSearchValue}
+      hintText="Enter Your Name"
+    />
+    <SearchBox
+      buttonText="click"
+      onTouchTap={this.getTextResult}
+      hintText="Enter Your Name"
+    />
+  <div>
+  document.body
+);

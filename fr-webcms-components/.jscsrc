@@ -1,0 +1,6 @@
+{
+  "preset": "airbnb",
+  "excludeFiles": ["coverage/**", "node_modules/**", "lib/**", "**/build/**", "**/node_modules/**"],
+  "fileExtensions": [".js", ".jsx"],
+  "validateQuoteMarks": { "mark": "'", "escape": true, "ignoreJSX": true }
+}

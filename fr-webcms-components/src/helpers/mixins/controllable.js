@@ -1,0 +1,24 @@
+import React from 'react';
+
+export default {
+
+  propTypes: {
+    onChange: React.PropTypes.func,
+    value: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.array,
+    ]),
+    valueLink: React.PropTypes.shape({
+      value: React.PropTypes.string.isRequired,
+      requestChange: React.PropTypes.func.isRequired,
+    }),
+  },
+
+  getValueLink(props) {
+    return props.valueLink || {
+      value: props.value,
+      requestChange: props.onChange,
+    };
+  },
+
+};

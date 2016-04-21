@@ -1,0 +1,11 @@
+// Image Usage
+<Image
+  alternateText="React.JS"
+  source="https://facebook.github.io/react/img/logo_og.png"
+/>
+
+<Image
+  source="https://facebook.github.io/react/img/logo_og.png"
+  style={{width: 50, height: 50}}
+  onLoad={this.onLoad}
+/>

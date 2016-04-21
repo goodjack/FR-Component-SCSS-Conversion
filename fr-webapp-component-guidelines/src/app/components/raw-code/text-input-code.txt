@@ -1,0 +1,42 @@
+//Text Input Usage
+
+<div style={styles.group}>
+  <TextInput
+    style={styles.textfield}
+    hintText=" Enter your name" /><br/>
+  <TextInput
+    style={styles.textfield}
+    hintText=" It has default value"
+    defaultValue="Default Value" /><br/>
+  <br/>
+  <TextInput
+    style={{height: 50}}
+    hintText="Large text box"
+     /><br/><br/>
+  <TextInput
+    style={{width: 30}}
+    hintText="$"
+      /><br/>
+  <TextInput
+    style={styles.textfield}
+    hintText="Hint Text"
+    valueLink={this.linkState('valueLinkValue')} /><br/>
+  <TextInput
+    style={styles.textfield}
+    hintText="Hint Text"
+    value={'Updated : ' + this.state.valueLinkValue} /><br/>
+</div>
+<div style={styles.group}>
+  <TextInput
+    hintText="Password Field"
+    type="password" /><br/>
+  <TextInput
+    style={styles.textfield}
+    hintText="Disabled Text Input"
+    disabled={true} /><br/>
+  <TextInput
+    style={styles.textfield}
+    hintText="Disabled Text Input with value"
+    disabled={true}
+    defaultValue="Disabled With Value" />
+</div>

@@ -1,0 +1,33 @@
+//icon-button usage
+import React from 'react';
+import {IconButton} from 'uniqlo-ui';
+
+const IconButtonExampleSimple = () => (
+  <div>
+    <IconButton >
+      <ActionGrade />
+    </IconButton>
+    <IconButton>
+      <ActionGrade/>
+    </IconButton>
+    <IconButton>
+      <ActionFadeButton
+        fill="red"
+        stroke="#000000"
+        strokeWidth="0.5"
+      />
+    </IconButton>
+    <IconButton
+      iconclassName="muidocs-icon-custom-github"
+      style={{ backgroundColor: 'red' }}
+    />
+    <IconButton>
+      <Image
+        source="https://facebook.github.io/react/img/logo_og.png"
+        style={{ width: 25, height: 25 }}
+      />
+    </IconButton>
+  </div>
+);
+
+export default IconButtonExampleSimple;

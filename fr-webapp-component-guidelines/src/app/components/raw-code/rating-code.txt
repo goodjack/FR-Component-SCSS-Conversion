@@ -1,0 +1,15 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Rating} from 'uniqlo-ui';
+
+ReactDOM.render(
+  <div>
+  <Rating fullStyle = {{
+    fill: 'red',
+  }} ratingCount={3.5} maxCount ={7}/>
+  <Rating fullStyle = {{
+    fill: 'Brown',
+  }} ratingCount={4} maxCount ={7}/>
+  </div>,
+   document.body
+);

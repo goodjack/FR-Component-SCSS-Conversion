@@ -1,0 +1,47 @@
+// AnchorButton Usage
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {AnchorButton, Grid, GridCell, Image} from 'uniqlo-ui';
+
+ReactDOM.render(
+    <Grid maxCols={1}>
+      <GridCell>
+        <Image source="img/category_1.jpg" />
+      </GridCell>
+    </Grid>
+    <Grid maxCols={8}>
+      <AnchorButton
+        defaultImage="img/image_1.jpg"
+        rollOverImage="img/image_1-hover.jpg"
+        sectionLink="section_1"
+      />
+      <AnchorButton
+        defaultImage="img/image_2.jpg"
+        rollOverImage="img/image_2-hover.jpg"
+        sectionLink="section_2"
+      />
+      <AnchorButton
+        defaultImage="img/image_3.jpg"
+        rollOverImage="img/image_3-hover.jpg"
+        sectionLink="section_3"
+      />
+    </Grid>
+    <Grid maxCols={1}>
+      <GridCell>
+        <Image source="img/category_2.jpg" />
+      </GridCell>
+    </Grid>
+    <Grid maxCols={8}>
+      <AnchorButton
+        defaultImage="img/image_1.jpg"
+        rollOverImage="img/image_1-hover.jpg"
+        sectionLink="section_1"
+      />
+      <AnchorButton
+        defaultImage="img/image_2.jpg"
+        rollOverImage="img/image_2-hover.jpg"
+        sectionLink="section_2"
+      />
+    </Grid>,
+    document.body
+);

@@ -1,0 +1,19 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Chip,ChipChild} from 'uniqlo-ui';
+
+ReactDOM.render(
+  <div>
+  <Chip headingText = "ColorCode : " onMouseClick ={this.callBackTest}>
+    <ChipChild enable = {false} headingContent = "42 Blue" toolTipData = "Blue">
+      <Image source="http://img.tradeindia.com/fp/0/229/935.jpg" />
+    </ChipChild>
+  </Chip>
+  <Chip headingText = "ColorCode : " onMouseClick ={this.callBackTest}>
+    <ChipChild enable = {false} headingContent = "42 Blue" toolTipData = "Blue">
+      <Text>X</Text>
+    </ChipChild>
+  </Chip>
+  </div>,
+   document.body
+);

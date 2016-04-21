@@ -1,0 +1,12 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {ProductColorStrip} from 'uniqlo-ui';
+
+ReactDOM.render(
+  <div>
+    <ProductColorStrip limit="5" swatchImageSrc="http://im.uniqlo.com/images/jp/pc/goods/177836/chip/00_177836.gif" />
+    <ProductColorStrip limit="5" swatchImageSrc="http://im.uniqlo.com/images/jp/pc/goods/164200/chip/53_164200.gif" />
+    <ProductColorStrip limit="5" swatchImageSrc="http://im.uniqlo.com/images/jp/pc/goods/164200/chip/65_164200.gif" />
+  </div>,
+   document.body
+);

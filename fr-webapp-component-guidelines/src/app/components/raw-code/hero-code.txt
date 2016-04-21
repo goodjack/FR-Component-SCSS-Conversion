@@ -1,0 +1,36 @@
+<div style={containerStyle}>
+<Hero
+  variation="imageRight"
+  title="セーター・ カーディガン"
+  subtitle="SWEATERS & CARDIGANS"
+  text="コットンカシミヤ、ミドルゲージカシミヤ100% ラムウール。どんなシーンでも活用できる デザイン豊富なラインナップ"
+  imageSrc="images/hero1.jpg"
+  imageTitle="imageAltText"
+  screenRatio="40:60"
+/>
+</div>
+<br />
+<div style={containerStyle}>
+<Hero
+  variation="imageLeft"
+  text="コットンカシミヤ、ミドルゲージカシミヤ100% ラムウール。どんなシーンでも活用できる デザイン豊富なラインナップ"
+  textStyle={{color: 'red'}}
+  imageSrc="images/hero3.jpg"
+  imageTitle="imageAltText"
+  icon="Instagram"
+  iconText="2 days ago"
+/>
+</div>
+<br />
+<div style={containerStyle}>
+<Hero
+  variation="overlay"
+  imageSrc="images/hero2.jpg"
+  imageTitle="imageAltText"
+  subtitle="SWEATERS & CARDIGANS"
+  text="コットンカシミヤ、ミドルゲージカシミヤ100% ラムウール。どんなシーンでも活用できる デザイン豊富なラインナップ"
+  linkText="Shop This Look"
+  linkUrl="http://www.google.com"
+  navToOverlayComp={false}
+/>
+</div>

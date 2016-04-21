@@ -1,0 +1,13 @@
+// Button Usage
+<div>
+  <Button label="Click me" labelStyle={{color: 'red', display: 'block'}}/>
+</div>
+<br/>
+<div>
+  <Button label="LOG IN" style={{backgroundColor: 'red', color: 'white', fontSize: 15}}/>
+</div>
+<br/>
+<div>
+  <Button label="PREVIEW"/>
+</div>
+

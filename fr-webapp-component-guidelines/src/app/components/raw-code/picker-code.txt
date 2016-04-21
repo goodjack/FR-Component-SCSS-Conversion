@@ -1,0 +1,6 @@
+<Picker>
+  <PickerOption name="Morning" value="1"/>
+  <PickerOption name="Afternoon" value="2"/>
+  <PickerOption name="Evening" value="3"/>
+  <PickerOption name="Night" value="4"/>
+</Picker>

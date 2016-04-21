@@ -1,0 +1,11 @@
+<UqLabel text="sale" type="discount" />
+<br />
+<UqLabel text="promotion" type="promo" />
+<br />
+<UqLabel text="low stock" type="onlineLowStock" />
+<br />
+<UqLabel text="New" type="new" />
+<br />
+<UqLabel text="multi buy" type="multiBuy" />
+<br />
+<UqLabel text="limited" type="limitedOffer" />

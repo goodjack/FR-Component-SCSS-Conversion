@@ -1,0 +1,42 @@
+// FilmStrip Usage
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {FilmStrip, FilmStripItem} from 'uniqlo-ui';
+
+ReactDOM.render(
+    <div>
+      <FilmStrip display={3}>
+        <FilmStripItem
+          imageSource="http://thebestfashionblog.com/wp-content/uploads/2012/07/Menswear-Essentials-in-Uniqlo-Fall-Winter-2012-2013-19.jpg"
+          link="http://www.uniqlo.com/jp/stylingbook/pc/style/7746"
+          targetwindow="_blank"
+         />
+        <FilmStripItem
+          imageSource="http://m5.paperblog.com/i/29/298811/uniqlo-philippines-fall-winter-collection-201-L-jzylce.jpeg"
+          link="http://www.uniqlo.com/jp/stylingbook/pc/style/7746"
+          targetwindow="_blank"
+        />
+        <FilmStripItem
+          imageSource="http://thebestfashionblog.com/wp-content/uploads/2012/07/Menswear-Essentials-in-Uniqlo-Fall-Winter-2012-2013-18.jpg"
+          link="http://www.uniqlo.com/jp/stylingbook/pc/style/7746"
+          targetwindow="_blank"
+        />
+        <FilmStripItem
+          imageSource="http://m5.paperblog.com/i/29/298811/uniqlo-philippines-fall-winter-collection-201-L-jzylce.jpeg"
+          link="http://www.uniqlo.com/jp/stylingbook/pc/style/7746"
+          targetwindow="_blank"
+        />
+        <FilmStripItem
+          imageSource="http://thebestfashionblog.com/wp-content/uploads/2012/08/Uniqlo-Denim-Autumn-Winter-2012-2013-Look-Book-10-600x802.jpg"
+          link="http://www.uniqlo.com/jp/stylingbook/pc/style/7746"
+          targetwindow="_blank"
+        />
+        <FilmStripItem
+          imageSource="http://thebestfashionblog.com/wp-content/uploads/2012/07/Menswear-Essentials-in-Uniqlo-Fall-Winter-2012-2013-19.jpg"
+          link="http://www.uniqlo.com/jp/stylingbook/pc/style/7746"
+          targetwindow="_blank"
+        />
+      </FilmStrip>
+    </div>
+    document.body
+);

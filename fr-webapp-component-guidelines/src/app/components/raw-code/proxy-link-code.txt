@@ -1,0 +1,21 @@
+<ProxyLink
+	linkText="This is link text"
+	linkUrl="http://www.google.com"
+/>
+<br/>
+<br/>
+<ProxyLink
+	linkText="This is 2nd link text"
+	linkUrl="http://www.google.com"
+	textColor="blue"
+	textDecoration="none"
+	fontSize="2em"
+/>
+<br/>
+<br/>
+<ProxyLink linkUrl="http://www.uniqlo.com">
+	<Image source="https://facebook.github.io/react/img/logo_og.png" style={{width: '100%'}}/>
+</ProxyLink>
+<ProxyLink onClickEvent={onClick}>
+	<Image source="https://facebook.github.io/react/img/logo_og.png" style={{width: '100%'}}/>
+</ProxyLink>

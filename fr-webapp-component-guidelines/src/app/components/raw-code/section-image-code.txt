@@ -1,0 +1,12 @@
+// Section Image Usage
+import React from 'react';
+import {SectionImage} from 'uniqlo-ui';
+
+const SectionImageExampleSimple = () => (
+  <div>
+  <SectionImage source="http://image2.groupbuya.com/images/promo/46455/46455_a.jpg"
+    link="https://facebook.github.io/react" targetwindow="_blank" alternateText="AltImage"/>
+  </div>
+);
+
+export default SectionImageExampleSimple;

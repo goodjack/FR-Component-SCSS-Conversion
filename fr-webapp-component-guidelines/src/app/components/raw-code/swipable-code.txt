@@ -1,0 +1,8 @@
+<Swipable>
+  <Image source="http://uniqlo.scene7.com/is/image/UNIQLO/goods_67_163334"  style={styles.img} />
+  <Image source="http://uniqlo.scene7.com/is/image/UNIQLO/goods_31_170527" style={styles.img} />
+  <Image source="http://uniqlo.scene7.com/is/image/UNIQLO/goods_75_157491"  style={styles.img} />
+  <Image source="http://uniqlo.scene7.com/is/image/UNIQLO/goods_67_163334"  style={styles.img} />
+  <Image source="http://uniqlo.scene7.com/is/image/UNIQLO/goods_75_157491"  style={styles.img}  />
+  <Image source="http://uniqlo.scene7.com/is/image/UNIQLO/goods_31_170527" style={styles.img} />
+</Swipable>

@@ -1,0 +1,33 @@
+<Label
+  style={{borderRadius: '5px', fontWeight: 'bold'}}
+  background="black"
+  foreground="white"
+  text="WOMEN"
+/>
+<Label
+  style={{borderRadius: '5px', backgroundColor: 'black', color: 'white', fontWeight: 'bold'}}
+  text="新作"
+/>
+<br />
+<br />
+<div>
+  <Label
+    text="This is a label text just to show default label style"
+  />
+</div>
+<br />
+<div>
+  <Label
+    background="green"
+    foreground="white"
+    text="Label text"
+  />
+</div>
+<br />
+<div>
+  <Label
+    background="Red"
+    style={{ lineHeight: "50px", fontSize: 50, border: '1px solid black' }}
+    text="A very Big and long Label"
+  />
+</div>

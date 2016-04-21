@@ -1,0 +1,10 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Filter} from 'uniqlo-ui';
+
+ReactDOM.render(
+  <div>
+    <Filter data = {data}>
+  </div>,
+   document.body
+);

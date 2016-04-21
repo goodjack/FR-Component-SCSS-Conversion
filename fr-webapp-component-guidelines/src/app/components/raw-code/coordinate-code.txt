@@ -1,0 +1,13 @@
+// Coordinate Usage
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Coordinate} from 'uniqlo-ui';
+
+ReactDOM.render(
+    <div>
+    <Coordinate lang="ja" limit="4" locale="jp" styleId="7790,7746"
+      mainCopy="オンラインショップにて、ピンクを購入し"
+      subCopy="オンラインショップにて、ピンクを購入しました。身長も体重もない自分には今ま" />
+    </div>,
+    document.body
+);

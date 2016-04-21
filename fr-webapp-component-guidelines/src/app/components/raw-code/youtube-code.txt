@@ -1,0 +1,12 @@
+//youtube video component usage
+<div>
+  <Youtube source="gHcfGU0zim8" style={{width: 500, height: 200}}/>
+</div>
+<br/>
+<div>
+  <Youtube source="gHcfGU0zim8" allowAutoplay={true} style={{width: 500, height: 200}} />
+</div>
+<br/>
+<div>
+  <Youtube source="gHcfGU0zim8" showControls={false} style={{width: 500, height: 200}}/>
+</div>

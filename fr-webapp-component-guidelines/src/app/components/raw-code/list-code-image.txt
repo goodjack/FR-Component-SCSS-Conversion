@@ -1,0 +1,17 @@
+<List>
+  <ListItem link="http://google.com"
+    leftIcon="Favorite" primaryTogglesNestedList={true} label="Sent Mail" />
+  <ListItem link="http://google.com" leftIcon="Star" hoverEffect={false} label="Inbox" />
+  <ListItem
+    leftIcon="ActionGrade"
+    initiallyOpen={false}
+    hoverStyle={{ backgroundColor: '#CCC'}}
+    label="Inbox" >
+    <List>
+      <ListItem link="http://google.com"
+        leftIcon="Favorite" primaryTogglesNestedList={true} label="Send" />
+      <ListItem link="http://google.com"
+        leftIcon="ActionGrade" primaryTogglesNestedList={true} label="Inbox" />
+    </List>
+  </ListItem>
+</List>

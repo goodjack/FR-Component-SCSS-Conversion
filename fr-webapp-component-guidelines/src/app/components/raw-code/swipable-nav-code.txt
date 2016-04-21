@@ -1,0 +1,8 @@
+<SwipableNav>
+  <SwipableNavItem text="See All" link="#" active />
+  <SwipableNavItem text="CottonCashmere" link="#"  />
+  <SwipableNavItem text="100% Cashmere" link="#"  />
+  <SwipableNavItem text="UV Cut" link="#"  />
+  <SwipableNavItem text="HEATTECH" link="#" />
+  <SwipableNavItem text="Lamswool" link="#" />
+</Swipable>

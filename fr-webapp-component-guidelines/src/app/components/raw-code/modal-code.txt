@@ -1,0 +1,54 @@
+<div>
+  <Button id="btn1" label="Show Image Popup" onTouchTap={this.onClickEvent} />
+  {this.state.showImagePopup ?
+    <Modal onDismiss={this.closeModal}>
+      <div>
+        <Image
+          source="https://facebook.github.io/react/img/logo_og.png"
+          style={{width: 500, height: 500}} />
+      </div>
+    </Modal> : null
+  }
+</div>
+<br />
+<div>
+  <Button id="btn2" label="Show Youtube Popup" onTouchTap={this.onClickEvent} />
+  {this.state.showYoutubePopup ?
+    <Modal
+      onDismiss={this.closeModal}
+      bodyStyle={{backgroundColor: 'transparent'}}
+    >
+      <Youtube source="gHcfGU0zim8" />
+    </Modal> : null
+  }
+</div>
+<br />
+<div>
+  <Button
+    id="btn3"
+    label="Show popup with multiple child components"
+    onTouchTap={this.onClickEvent}
+  />
+  {this.state.showTextPopup ?
+    <Modal
+      onDismiss={this.closeModal}
+      overlayStyle={textOverlayStyle}
+      bodyStyle={textPopupBodyStyle}
+      contentStyle={textPopupContentStyle}
+      headerStyle={textPopupHeaderStyle}
+      closeButtonText="close"
+      closeButtonTextStyle={textPopupCloseComponentStyle.closeLabelStyle}
+      closeButtonStyle={textPopupCloseComponentStyle.closeButton}
+    >
+      <Heading type="h4" headingText="This is a header component." style={{display: 'block'}}/>
+      <IconButton iconclassName="muidocs-icon-custom-github" style={{backgroundColor: 'red'}}/>
+      <CheckBox
+        name="checkboxName2"
+        value="checkboxValue2"
+        label="fed the dog"
+        style={{display: 'inline'}}
+        defaultChecked={true}
+      />
+    </Modal> : null
+  }
+</div>
