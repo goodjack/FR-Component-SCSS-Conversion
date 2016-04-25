@@ -35,15 +35,20 @@ import Heading from './Heading';
 import Hero from './uniqlo/Hero';
 import HeroMovie from './uniqlo/HeroMovie';
 import IconButton from './IconButton';
+import IconHead from './core/IconHead';
+import ImagePlusText from './uniqlo/ImagePlusText';
 import ImageTile from './ImageTile';
+import Instagram from './core/Instagram';
 import Label from './Label';
 import List, { ListItem } from './core/List';
 import Modal from './core/Modal';
 import Picker, { PickerOption } from './core/Picker';
 import ProductGrid, { Fillers } from './ProductGrid';
+import ProxyLink from './core/ProxyLink';
 import RadioButton from './core/RadioButtonGroup/RadioButton';
 import RadioButtonGroup from './core/RadioButtonGroup';
 import Rating from './Rating';
+import Overlay from './Overlay';
 import RollOverImage from './RollOverImage';
 import SearchBox from './SearchBox';
 import SectionAnchorBar from './SectionAnchorBar';
@@ -54,9 +59,12 @@ import Swipable from './core/Swipable';
 import SwipableNav, { SwipableNavItem } from './uniqlo/SwipableNav';
 import Tabs, { Tab } from './uniqlo/Tabs';
 import TabbedCarousel from './TabbedCarousel';
+import TapableGrid from './uniqlo/TapableGrid';
+import TapableItem from './uniqlo/TapableGrid/TapableItem';
 import Text from './Text';
-import UpdatedText from './UpdatedText';
 import TextInput from './TextInput';
+import SocialMediaPost from './uniqlo/SocialMediaPost';
+import ThisOrThat from './uniqlo/ThisOrThat';
 import UqLabel from './uniqlo/UqLabel';
 import Youtube from './core/Youtube';
 import Filter from './Filter';
@@ -74,6 +82,7 @@ export {
   BreadCrumb,
   BreadCrumbs,
   Button,
+  Overlay,
   ButtonTile,
   Carousel,
   CarouselHead,
@@ -100,8 +109,11 @@ export {
   Hero,
   HeroMovie,
   IconButton,
+  IconHead,
   Image,
+  ImagePlusText,
   ImageTile,
+  Instagram,
   Label,
   List,
   ListItem,
@@ -110,6 +122,7 @@ export {
   Picker,
   PickerOption,
   ProductGrid,
+  ProxyLink,
   RadioButton,
   RadioButtonGroup,
   Rating,
@@ -125,9 +138,12 @@ export {
   Tab,
   Tabs,
   TabbedCarousel,
+  TapableGrid,
+  TapableItem,
   Text,
-  UpdatedText,
   TextInput,
+  SocialMediaPost,
+  ThisOrThat,
   TileButton,
   UqLabel,
   Youtube,
@@ -152,6 +168,7 @@ export default {
   CarouselHead,
   CarouselTile,
   CheckBox,
+  Overlay,
   Chip,
   ChipChild,
   Collage,
@@ -173,8 +190,11 @@ export default {
   Hero,
   HeroMovie,
   IconButton,
+  IconHead,
   Image,
+  ImagePlusText,
   ImageTile,
+  Instagram,
   Label,
   List,
   ListItem,
@@ -183,6 +203,7 @@ export default {
   Picker,
   PickerOption,
   ProductGrid,
+  ProxyLink,
   RadioButton,
   RadioButtonGroup,
   Rating,
@@ -199,9 +220,10 @@ export default {
   Tabs,
   TabbedCarousel,
   Text,
-  UpdatedText,
   TextInput,
+  ThisOrThat,
   TileButton,
+  SocialMediaPost,
   UqLabel,
   Youtube,
   Filter,

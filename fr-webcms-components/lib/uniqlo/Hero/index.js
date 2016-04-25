@@ -44,12 +44,17 @@ var _heroVariationOverlay = require('./heroVariationOverlay');
 
 var _heroVariationOverlay2 = _interopRequireDefault(_heroVariationOverlay);
 
+var _heroVariationTextOnImage = require('./heroVariationTextOnImage');
+
+var _heroVariationTextOnImage2 = _interopRequireDefault(_heroVariationTextOnImage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var string = _react.PropTypes.string;
 var object = _react.PropTypes.object;
 var oneOf = _react.PropTypes.oneOf;
 var bool = _react.PropTypes.bool;
+var func = _react.PropTypes.func;
 
 
 var getRelevantContextKeys = function getRelevantContextKeys(themeAndConfig) {
@@ -103,49 +108,52 @@ var getStyles = function getStyles(themeAndConfig, props) {
       fontSize: '1.5em',
       fontWeight: 'bold',
       lineHeight: 1.6,
-      color: hero.titleTextColor,
+      color: hero.titleTextColor || 'black',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       display: '-webkit-box',
       WebkitLineClamp: hero.titleLinesToShow || 3,
       WebkitBoxOrient: 'vertical',
+      textAlign: 'center',
       padding: 5
     },
     subtitle: {
       fontSize: '1em',
       lineHeight: 1.6,
-      color: hero.subtitleTextColor,
+      color: hero.subtitleTextColor || 'black',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       display: '-webkit-box',
       WebkitLineClamp: hero.subtitleLinesToShow || 3,
       WebkitBoxOrient: 'vertical',
+      textAlign: 'center',
       padding: 5
     },
     text: {
       fontSize: '1em',
       lineHeight: 1.6,
-      color: hero.textColor,
+      color: hero.textColor || 'black',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       display: '-webkit-box',
       WebkitLineClamp: hero.textLinesToShow || 3,
       WebkitBoxOrient: 'vertical',
+      textAlign: 'center',
       padding: 5
     },
-    imageContainerStyle: {
+    imageContainer: {
       backgroundColor: hero.imageBackgroundColor || 'lightgrey'
     },
-    iconContainerStyle: {
+    iconContainer: {
       position: 'absolute',
       bottom: 5
     },
-    iconTextStyle: {
-      color: 'black',
+    iconText: {
+      color: hero.textColor || 'black',
       fontSize: '0.75em',
       fontWeight: 'bold'
     },
-    proxyLinkStyle: {
+    proxyLink: {
       position: 'absolute',
       bottom: 5,
       right: 5,
@@ -154,7 +162,6 @@ var getStyles = function getStyles(themeAndConfig, props) {
     },
     textOverlay: {
       backgroundColor: textareaBgColor || hero.textareaBackgroundColor || 'white',
-      color: 'yellow',
       position: 'absolute',
       bottom: 15,
       left: 0,
@@ -162,64 +169,89 @@ var getStyles = function getStyles(themeAndConfig, props) {
       fontSize: '1em',
       padding: 5
     },
-    overlayProxyLinkStyle: {
+    overlayProxyLink: {
       textAlign: 'left',
       padding: 5
+    },
+    overlayIconContainer: {
+      position: 'relative',
+      padding: 5
+    },
+    TextOnImage: {
+      position: 'absolute',
+      top: '40%',
+      left: '35%',
+      backgroundColor: 'transparent',
+      width: '30%',
+      fontSize: '1em'
     }
   };
 };
 
 var Hero = function Hero(props, context) {
+  var style = props.style;
   var className = props.className;
   var title = props.title;
+  var titleStyle = props.titleStyle;
   var subtitle = props.subtitle;
+  var subtitleStyle = props.subtitleStyle;
   var text = props.text;
+  var textStyle = props.textStyle;
   var imageSrc = props.imageSrc;
-  var imageTitle = props.imageTitle;
   var variation = props.variation;
   var icon = props.icon;
   var iconText = props.iconText;
   var textareaBgColor = props.textareaBgColor;
   var linkText = props.linkText;
+  var linkTextColor = props.linkTextColor;
   var linkUrl = props.linkUrl;
   var linkFontWeight = props.linkFontWeight;
   var linkFontSize = props.linkFontSize;
   var linkTextDecoration = props.linkTextDecoration;
   var navToOverlayComp = props.navToOverlayComp;
+  var linkOnClick = props.linkOnClick;
+  var callOverlay = props.callOverlay;
+
 
   var themeAndConfig = {
     compTheme: context.compTheme || _themeManager2.default.getCompTheme(_lightRawTheme2.default),
     compConfig: context.compConfig || _configurationManager2.default.getCompConfig(_baseConfig2.default)
   };
+
   var styles = getStyles(themeAndConfig, props);
+  var mergedRootStyle = (0, _stylePropable.mergeStyles)(styles.root, style);
+  var mergedTitleStyle = (0, _stylePropable.mergeStyles)(styles.title, titleStyle);
+  var mergedSubtitleStyle = (0, _stylePropable.mergeStyles)(styles.subtitle, subtitleStyle);
+  var mergedTextStyle = (0, _stylePropable.mergeStyles)(styles.text, textStyle);
 
   // setting props to be passed to different variations
   var variationProps = {
-    rootStyle: styles.root,
+    rootStyle: mergedRootStyle,
     className: className,
-    titleStyle: styles.title,
-    subtitleStyle: styles.subtitle,
-    textStyle: styles.text,
+    titleStyle: mergedTitleStyle,
+    subtitleStyle: mergedSubtitleStyle,
+    textStyle: mergedTextStyle,
     title: title,
     subtitle: subtitle,
     imageSrc: imageSrc,
-    imageTitle: imageTitle,
     text: text,
-    imageContainerStyle: styles.imageContainerStyle,
+    imageContainerStyle: styles.imageContainer,
     icon: icon,
     iconText: iconText,
-    iconContainerStyle: styles.iconContainerStyle,
-    iconTextStyle: styles.iconTextStyle,
-    proxyLinkStyle: styles.proxyLinkStyle,
+    iconContainerStyle: styles.iconContainer,
+    iconTextStyle: styles.iconText,
+    proxyLinkStyle: styles.proxyLink,
     rightSideStyle: styles.rightSide,
-    textOverlay: styles.textOverlay,
-    overlayProxyLinkStyle: styles.overlayProxyLinkStyle,
     linkText: linkText,
+    linkTextColor: linkTextColor,
     linkUrl: linkUrl,
     linkFontWeight: linkFontWeight,
     linkFontSize: linkFontSize,
-    linkTextDecoration: linkTextDecoration
+    linkTextDecoration: linkTextDecoration,
+    linkOnClick: linkOnClick,
+    callOverlay: callOverlay
   };
+
   var markupToRender = void 0;
   switch (variation) {
     case 'imageRight':
@@ -241,7 +273,17 @@ var Hero = function Hero(props, context) {
     case 'overlay':
       {
         variationProps.navToOverlayComp = navToOverlayComp;
+        variationProps.overlayIconContainerStyle = styles.overlayIconContainerStyle;
+        variationProps.textOverlay = styles.textOverlay;
+        variationProps.overlayProxyLinkStyle = styles.overlayProxyLink;
         markupToRender = _react2.default.createElement(_heroVariationOverlay2.default, variationProps);
+        break;
+      }
+
+    case 'textOnImage':
+      {
+        variationProps.TextOnImage = styles.TextOnImage;
+        markupToRender = _react2.default.createElement(_heroVariationTextOnImage2.default, variationProps);
         break;
       }
 
@@ -252,24 +294,30 @@ var Hero = function Hero(props, context) {
 };
 
 Hero.propTypes = {
+  style: object,
   className: string,
   imageSrc: string.isRequired,
-  imageTitle: string,
   subtitle: string,
+  subtitleStyle: object,
   text: string,
+  textStyle: object,
   title: string,
+  titleStyle: object,
   screenRatio: string,
-  variation: oneOf(['imageLeft', 'imageRight', 'overlay']).isRequired,
+  variation: oneOf(['imageLeft', 'imageRight', 'overlay', 'textOnImage']).isRequired,
   icon: string,
   iconText: string,
   textOverlayMaxWidth: string,
   textareaBgColor: string,
   linkText: string,
+  linkTextColor: string,
   linkUrl: string,
   linkFontWeight: string,
   linkFontSize: string,
   linkTextDecoration: string,
-  navToOverlayComp: bool
+  navToOverlayComp: bool,
+  linkOnClick: func,
+  callOverlay: func
 };
 
 Hero.contextTypes = {

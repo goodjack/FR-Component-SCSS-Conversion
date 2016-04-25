@@ -14,14 +14,13 @@ describe('Hero', () => {
 
   it('should render all the props passed', () => {
     const heroProps = {
-      variation: 'imageRight',
+      variation: 'textOnImage',
       imageSrc: 'https://goo.gl/IWxflD',
       className: 'className',
       title: 'titleText',
       id: 'id',
       subtitle: 'subtitle',
       text: 'textContent',
-      imageTitle: 'alteText',
       imageStyle: { width: 50 },
       icon: 'Instagram',
       iconText: '2 days ago',
@@ -36,14 +35,13 @@ describe('Hero', () => {
     };
     const HeroTitle = TestUtils.renderIntoDocument(<ThemedHero { ...heroProps } />);
     const htProps = HeroTitle.props;
-    expect(htProps.variation).to.equal('imageRight');
+    expect(htProps.variation).to.equal('textOnImage');
     expect(htProps.imageSrc).to.equal('https://goo.gl/IWxflD');
     expect(htProps.className).to.equal('className');
     expect(htProps.title).to.equal('titleText');
     expect(htProps.id).to.equal('id');
     expect(htProps.subtitle).to.equal('subtitle');
     expect(htProps.text).to.equal('textContent');
-    expect(htProps.imageTitle).to.equal('alteText');
     expect(htProps.icon).to.equal('Instagram');
     expect(htProps.iconText).to.equal('2 days ago');
     expect(htProps.textOverlayMaxWidth).to.equal('50%');
@@ -85,17 +83,17 @@ describe('Hero', () => {
       imageTitle="Image alt text" imageSrc="https://goo.gl/IWxflD"
     />);
     const HeroImageAltTextNode = ReactDOM.findDOMNode(HeroImageAltText);
-    expect(HeroImageAltTextNode.querySelector('img').getAttribute('src'))
-    .to.equal('https://goo.gl/IWxflD');
+    expect(HeroImageAltTextNode.querySelectorAll('div')[1].style[`background-image`])
+      .to.equal('url(https://goo.gl/IWxflD)');
   });
 
-  it('should set imageTitle as image alt attribute of Hero component', () => {
+  it('should set screenRatio as expected', () => {
     const HeroImageAltText = TestUtils.renderIntoDocument(<ThemedHero variation="imageLeft"
-      imageTitle="Image alt text" imageSrc="https://goo.gl/IWxflD"
+      imageTitle="Image alt text" imageSrc="https://goo.gl/IWxflD" screenRatio="60:40"
     />);
     const HeroImageAltTextNode = ReactDOM.findDOMNode(HeroImageAltText);
-    expect(HeroImageAltTextNode.querySelector('img').getAttribute('alt'))
-    .to.equal('Image alt text');
+    expect(HeroImageAltTextNode.querySelectorAll('div')[0].style.width).to.equal('60%');
+    expect(HeroImageAltTextNode.querySelectorAll('div')[2].style.width).to.equal('40%');
   });
 
   it('should render icon and icon text passed to Hero component in overlay variation', () => {
@@ -177,10 +175,33 @@ describe('Hero', () => {
     />);
     let renderedNode = TestUtils.scryRenderedDOMComponentsWithTag(render, 'a');
     const anchorElem = ReactDOM.findDOMNode(renderedNode[0]);
-    console.log(anchorElem);
     TestUtils.Simulate.click(anchorElem);
     renderedNode = ReactDOM.findDOMNode(render);
     expect(renderedNode.querySelector('a')).to.equal(null);
   });
 
+  it('should display the title of Hero component in textOnImage variation as expected', () => {
+    const HeroTitle = TestUtils.renderIntoDocument(<ThemedHero variation="textOnImage"
+      imageSrc="https://goo.gl/IWxflD" title="セーター・ カーディガン"
+    />);
+    const HeroTitleNode = ReactDOM.findDOMNode(HeroTitle);
+    expect(HeroTitleNode.querySelectorAll('div')[1].getAttribute('style'))
+      .to.contains('top:40%;left:35%;');
+  });
+
+  it('should not display the Button over image in textOnImage when linkText is not passed', () => {
+    const HeroTitle = TestUtils.renderIntoDocument(<ThemedHero variation="textOnImage"
+      imageSrc="https://goo.gl/IWxflD" title="セーター・ カーディガン"
+    />);
+    const HeroTitleNode = TestUtils.scryRenderedDOMComponentsWithTag(HeroTitle, 'button');
+    expect(HeroTitleNode[0]).to.equal(undefined);
+  });
+
+  it('should display the Button over image in textOnImage when linkText is passed', () => {
+    const HeroTitle = TestUtils.renderIntoDocument(<ThemedHero variation="textOnImage"
+      imageSrc="https://goo.gl/IWxflD" title="セーター・ カーディガン" linkText="link"
+    />);
+    const HeroTitleNode = TestUtils.scryRenderedDOMComponentsWithTag(HeroTitle, 'button');
+    expect(HeroTitleNode[0].querySelector('span').textContent).to.equal('link');
+  });
 });

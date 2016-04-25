@@ -376,7 +376,8 @@ function getCompTheme(baseTheme, compTheme) {
       fontFamily: fontFamily
     },
     grid: {
-      cellPadding: 10,
+      verticalSpacing: 10,
+      horizontalSpacing: 10,
       cellHeight: 20
     },
     heading: {
@@ -544,6 +545,39 @@ function getCompTheme(baseTheme, compTheme) {
       clickTextColor: '#28788C',
       borderColor: _colors2.default.grey300,
       backgroundColor: _colors2.default.grey300
+    },
+    imagePlusText: {
+      textColor: palette.textColor,
+      borderColor: palette.borderColor,
+      textMargin: 10,
+      linkMargin: '10px 0 10px 0',
+      textPaddingLeft: '3%',
+      textPaddingRight: '3%'
+    },
+    instagram: {
+      captionTextColor: ptTextColor
+    },
+    social: {
+      titleColor: palette.textColor,
+      contentColor: palette.textColor,
+      linkColor: _colorManipulator2.default._convertHexToRGB(palette.primary3Color),
+      margin: '10px'
+    },
+    iconHead: {
+      textSize: '14px',
+      textColor: palette.textColor,
+      imageWidth: '25px',
+      imageHeight: 'auto'
+    },
+    thisOrThat: {
+      backgroundColor: palette.primary9Color,
+      borderColor: palette.borderColor,
+      overlaySize: '50px'
+    },
+    overlay: {
+      borderColor: _colors2.default.white,
+      backgroundColor: _colors2.default.black,
+      transparent: 'transparent'
     }
   }, compTheme);
 }

@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import Text from '../../Text';
 import Heading from '../../Heading';
 import Image from '../../core/Image';
@@ -6,7 +6,6 @@ import { mergeStyles } from '../../helpers/utils/stylePropable';
 import Icon from '../../core/Icon';
 import Null from '../../core/Null';
 import ProxyLink from '../../core/ProxyLink';
-import { getImageDimensions } from '../../helpers/utils/imageDimensions';
 
 const { string, object } = PropTypes;
 
@@ -26,10 +25,10 @@ const getIconComponent = (prop) => {
       </div>
     );
   } else {
-    markup = Null;
+    markup = false;
   }
 
-  return markup;
+  return markup || <Null />;
 };
 
 const getTitleContainer = (title, titleStyle) => {
@@ -37,10 +36,10 @@ const getTitleContainer = (title, titleStyle) => {
   if (title) {
     markup = (<Heading type="h1" headingText={title} style={titleStyle} />);
   } else {
-    markup = Null;
+    markup = false;
   }
 
-  return markup;
+  return markup || <Null />;
 };
 
 const getSubtitleContainer = (subtitle, subtitleStyle) => {
@@ -48,10 +47,10 @@ const getSubtitleContainer = (subtitle, subtitleStyle) => {
   if (subtitle) {
     markup = (<Heading type="h3" headingText={subtitle} style={subtitleStyle} />);
   } else {
-    markup = Null;
+    markup = false;
   }
 
-  return markup;
+  return markup || <Null />;
 };
 
 const getTextContainer = (text, textStyle) => {
@@ -59,16 +58,17 @@ const getTextContainer = (text, textStyle) => {
   if (text) {
     markup = (<Text style={textStyle} content={text} />);
   } else {
-    markup = Null;
+    markup = false;
   }
 
-  return markup;
+  return markup || <Null />;
 };
 
 const getLinkContainer = (prop) => {
   const {
   proxyLinkStyle,
   linkText,
+  linkTextColor,
   linkUrl,
   linkFontWeight,
   linkFontSize,
@@ -83,93 +83,61 @@ const getLinkContainer = (prop) => {
         linkFontSize={linkFontSize}
         linkFontWeight={linkFontWeight}
         linkTextDecoration={linkTextDecoration}
+        textColor={linkTextColor}
       />
     </div>);
   } else {
-    markup = Null;
+    markup = false;
   }
 
-  return markup;
+  return markup || <Null />;
 };
 
-class HeroVariationImageRight extends Component {
+const HeroVariationImageRight = (props) => {
 
-  state = {
-    imageWidth: '100%',
-    imageHeight: '100%',
-  };
+  const {
+    className,
+    imageSrc,
+    leftSideStyle,
+    rightSideStyle,
+    rootStyle,
+    subtitle,
+    subtitleStyle,
+    text,
+    textStyle,
+    title,
+    titleStyle,
+    imageContainerStyle,
+  } = props;
 
-  onImageLoaded = () => {
-    const imgRef = this.refs.heroImage;
-    const imageDimensions = getImageDimensions(
-      imgRef.childNodes[0].naturalHeight,
-      imgRef.childNodes[0].naturalWidth,
-      imgRef.clientHeight,
-      imgRef.clientWidth
-    );
-    this.setState({ ...imageDimensions });
-  };
-
-  render() {
-    const {
-      className,
-      imageSrc,
-      imageTitle,
-      leftSideStyle,
-      rightSideStyle,
-      rootStyle,
-      subtitle,
-      subtitleStyle,
-      text,
-      textStyle,
-      title,
-      titleStyle,
-      imageContainerStyle,
-    } = this.props;
-
-    const {
-      imageWidth,
-      imageHeight,
-      marginTop,
-      marginLeft,
-    } = this.state;
-    const imgContainer = mergeStyles(rightSideStyle, imageContainerStyle);
-    return (
-      <div
-        style={rootStyle}
-        className={className}
-      >
-        <div style={leftSideStyle}>
-          {getTitleContainer(title, titleStyle)}
-          {getSubtitleContainer(subtitle, subtitleStyle)}
-          {getTextContainer(text, textStyle)}
-          {getIconComponent(this.props)}
-          {getLinkContainer(this.props)}
-        </div>
-        <div ref="heroImage" style={imgContainer}>
-          <Image
-            onLoad={this.onImageLoaded}
-            source={imageSrc}
-            style={{
-              width: imageWidth,
-              height: imageHeight,
-              marginTop,
-              marginLeft,
-            }}
-            alternateText={imageTitle}
-          />
-        </div>
+  const imgContainer = mergeStyles(rightSideStyle, imageContainerStyle);
+  return (
+    <div
+      style={rootStyle}
+      className={className}
+    >
+      <div style={leftSideStyle}>
+        {getTitleContainer(title, titleStyle)}
+        {getSubtitleContainer(subtitle, subtitleStyle)}
+        {getTextContainer(text, textStyle)}
+        {getIconComponent(props)}
+        {getLinkContainer(props)}
       </div>
-    );
-  }
+      <div style={imgContainer}>
+        <Image
+          source={imageSrc}
+          useImgTag={false}
+        />
+      </div>
+    </div>
+  );
 
-}
+};
 
 HeroVariationImageRight.propTypes = {
   className: string,
   id: string,
   imageSrc: string.isRequired,
-  imageTitle: string,
   leftSideStyle: object,
   rightSideStyle: object,
   rootStyle: object,
@@ -186,6 +154,7 @@ HeroVariationImageRight.propTypes = {
   iconTextStyle: object,
   proxyLinkStyle: object,
   linkText: string,
+  linkTextColor: string,
   linkUrl: string,
   linkFontWeight: string,
   linkFontSize: string,

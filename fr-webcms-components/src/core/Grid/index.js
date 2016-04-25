@@ -35,6 +35,8 @@ class Grid extends Component {
   static propTypes = {
     cellHeight: number,
     cellWidth: number,
+    verticalSpacing: number,
+    horizontalSpacing: number,
     cellPadding: number,
     children: any,
     maxCols: number,
@@ -54,7 +56,8 @@ class Grid extends Component {
     const {
       cellHeight,
       cellWidth,
-      cellPadding,
+      verticalSpacing,
+      horizontalSpacing,
       children,
       maxCols,
       style,
@@ -72,12 +75,11 @@ class Grid extends Component {
 
     const columns = maxCols || gridContext.maxCols || 12;
 
-    let padding;
-    if (cellPadding === 0) {
-      padding = 0;
-    } else {
-      padding = cellPadding || gridContext.cellPadding || 10;
-    }
+    const vSpacing = verticalSpacing || gridContext.verticalSpacing || 10;
+    const hSpacing = horizontalSpacing || gridContext.horizontalSpacing || 10;
+
+    const vPadding = (verticalSpacing === 0) ? 0 : vSpacing;
+    const hPadding = (horizontalSpacing === 0) ? 0 : hSpacing;
 
     const mergedRootStyles = mergeStyles(styles.root, style);
 
@@ -86,17 +88,17 @@ class Grid extends Component {
       const childCols = currentChild.props.colSpan || gridCellContext.colSpan || 1;
       const childRows = currentChild.props.rowSpan || gridCellContext.rowSpan;
 
-      const childWidth = cellWidth ? cellWidth * childCols + padding : `${100 / columns * childCols}%`;
+      const childWidth = cellWidth ? cellWidth * childCols + hPadding : `${100 / columns * childCols}%`;
 
       let itemStyle = mergeStyles(styles.item, {
         width: childWidth,
-        paddingRight: padding,
-        paddingBottom: padding,
+        paddingRight: hPadding,
+        paddingBottom: vPadding,
       });
 
       if (cellHeight && childRows) {
         itemStyle = mergeStyles(itemStyle, {
-          height: cellHeight * childRows + padding,
+          height: cellHeight * childRows + vPadding,
         });
       }
 

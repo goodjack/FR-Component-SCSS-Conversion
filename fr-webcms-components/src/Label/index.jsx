@@ -2,18 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import UniqueId from '../helpers/utils/uniqueId';
 import { mergeStyles } from '../helpers/utils/stylePropable';
 import composeContextPure from '../helpers/composedComponents/contextPure';
+import styl from './label.scss';
+//
+console.log(styl.label);
 
 const { string, object } = PropTypes;
-const styles = {
-  display: 'inline-block',
-  padding: 5,
-  backgroundColor: 'transparent',
-  color: 'black',
-  fontSize: '10px',
-  lineHeight: '15px',
-  margin: 2,
-  textAlign: 'center',
-};
 
 class Label extends Component {
 
@@ -40,7 +33,7 @@ class Label extends Component {
       text,
     } = this.props;
     const inputId = id || this._uniqueId;
-    let labelStyle = mergeStyles.apply(this, [styles, style]);
+    let labelStyle = mergeStyles.apply(this, [style]);
     if (background) {
       labelStyle = mergeStyles.apply(this, [labelStyle, { backgroundColor: background }]);
     }
@@ -52,7 +45,7 @@ class Label extends Component {
     return (
       <div
         id={inputId}
-        className={className}
+        className="label"
         style={labelStyle}
       >
         {text}

@@ -39,6 +39,7 @@ const prepareStyle = ({ context }) => {
     listClickImageStyle: {
       float: 'right',
       display: 'block',
+      width: '9%',
     },
   };
 

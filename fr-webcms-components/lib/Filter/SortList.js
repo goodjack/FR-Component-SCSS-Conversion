@@ -82,7 +82,8 @@ var prepareStyle = function prepareStyle(_ref) {
     },
     listClickImageStyle: {
       float: 'right',
-      display: 'block'
+      display: 'block',
+      width: '9%'
     }
   };
 

@@ -110,7 +110,7 @@ var ProductGrid = function (_Component) {
       var pages = pageNo || 0;
       var productIds = products || '';
       var productUrl = catelogUrl;
-      var queryParameter = (0, _query.query)(categoryId, pages, productIds);
+      var queryParameter = (0, _query.query)(categoryId, productIds, pages);
       var queryData = {
         queryParameter: queryParameter,
         userName: userName,
@@ -187,14 +187,16 @@ var ProductGrid = function (_Component) {
     value: function renderProductChildren() {
       var data = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
       var language = arguments[1];
+      var objString = arguments[2];
 
       var ProductCards = [];
+      var itemData = data[objString];
       var _props = this.props;
       var variationType = _props.variationType;
       var ratingLinkUrl = _props.ratingLinkUrl;
 
-      var items = data.search && data.search.items || [];
-      if (data.search && data.search.items) {
+      var items = itemData && itemData.items || [];
+      if (itemData && itemData.items) {
         ProductCards = items.map(function (pItem, index) {
           var cardProps = Object.assign({}, language, {
             variationType: variationType,
@@ -220,13 +222,15 @@ var ProductGrid = function (_Component) {
       var children = _this$props.children;
       var style = _this$props.style;
       var variationType = _this$props.variationType;
+      var products = _this$props.products;
 
-      var other = _objectWithoutProperties(_this$props, ['padding', 'cellHeight', 'children', 'style', 'variationType']);
+      var other = _objectWithoutProperties(_this$props, ['padding', 'cellHeight', 'children', 'style', 'variationType', 'products']);
 
       var language = _this.context.language || _languageConfiguration2.default.productCard;
       var cols = _this.getCols(variationType);
       var productDetail = _this.state.productDetail;
       var gridStyle = _stylePropable.mergeStyles.apply(_this, [styles.root, style]);
+      var searchString = products ? 'list' : 'search';
       return _react2.default.createElement(
         _Grid2.default,
         {
@@ -235,7 +239,7 @@ var ProductGrid = function (_Component) {
           style: gridStyle,
           cellHeight: parseInt(cellHeight, 10)
         },
-        this.renderProductChildren(productDetail, language),
+        this.renderProductChildren(productDetail, language, searchString),
         this.getFillers(variationType)
       );
     }

@@ -77,16 +77,21 @@ var prepareStyle = function prepareStyle(_ref) {
     },
     labelStyle: {
       fontSize: 15
+    },
+    anchor: {
+      display: 'block',
+      lineHeight: 0
     }
   };
 
   var buttonStyle = _stylePropable.mergeStyles.apply(undefined, [styles.button, props.style]);
+  var anchorStyle = _stylePropable.mergeStyles.apply(undefined, [styles.anchor, props.linkStyle]);
   if (props.hoverStyle && state.hovered) {
     buttonStyle = _stylePropable.mergeStyles.apply(undefined, [styles.button, props.style, props.hoverStyle]);
   }
 
   var styleLabel = _stylePropable.mergeStyles.apply(undefined, [styles.labelStyle, props.labelStyle]);
-  return { buttonStyle: buttonStyle, styleLabel: styleLabel };
+  return { buttonStyle: buttonStyle, styleLabel: styleLabel, anchorStyle: anchorStyle };
 };
 
 var Button = function (_Component) {
@@ -129,13 +134,16 @@ var Button = function (_Component) {
       var id = _props.id;
       var disabled = _props.disabled;
       var children = _props.children;
+      var link = _props.link;
+      var target = _props.target;
 
-      var other = _objectWithoutProperties(_props, ['style', 'label', 'labelStyle', 'hoverStyle', 'className', 'id', 'disabled', 'children']);
+      var other = _objectWithoutProperties(_props, ['style', 'label', 'labelStyle', 'hoverStyle', 'className', 'id', 'disabled', 'children', 'link', 'target']);
 
       var _prepareStyle = prepareStyle(this);
 
       var buttonStyle = _prepareStyle.buttonStyle;
       var styleLabel = _prepareStyle.styleLabel;
+      var anchorStyle = _prepareStyle.anchorStyle;
 
 
       var enhancedButtonChildren = children ? children : _react2.default.createElement(
@@ -144,7 +152,7 @@ var Button = function (_Component) {
         label
       );
 
-      var ButtonProps = {
+      var buttonProps = {
         className: className,
         id: id,
         disabled: disabled,
@@ -153,12 +161,22 @@ var Button = function (_Component) {
         onMouseEnter: this.handleMouseEnter,
         onMouseLeave: this.handleMouseLeave
       };
-
-      return _react2.default.createElement(
+      var anchorProps = {
+        style: anchorStyle,
+        href: link,
+        target: target
+      };
+      var renderNode = _react2.default.createElement(
         'button',
-        ButtonProps,
+        buttonProps,
         enhancedButtonChildren
       );
+      var linkNode = link ? _react2.default.createElement(
+        'a',
+        anchorProps,
+        renderNode
+      ) : renderNode;
+      return linkNode;
     }
   }]);
 
@@ -172,10 +190,13 @@ Button.propTypes = {
   id: string,
   label: string,
   labelStyle: object,
+  link: string,
+  linkStyle: object,
   onMouseEnter: func,
   onMouseLeave: func,
   onTouchTap: func,
   style: object,
+  target: string,
   disabled: bool
 };
 Button.defaultProps = {

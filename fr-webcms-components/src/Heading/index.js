@@ -32,7 +32,6 @@ const Heading = ({
   const compId = id || UniqueId.generate();
   const compStyles = {
     color: textColor,
-    display: 'inline',
   };
 
   const headingProps = {

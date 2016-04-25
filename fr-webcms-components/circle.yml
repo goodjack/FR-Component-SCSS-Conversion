@@ -10,3 +10,4 @@ deployment:
     branch: [develop]
     commands:
       - ./auto_merge.sh
+      - ./library.sh

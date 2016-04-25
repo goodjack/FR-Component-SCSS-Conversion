@@ -6,13 +6,12 @@ import { mergeStyles } from '../../helpers/utils/stylePropable';
 import Icon from '../../core/Icon';
 import Null from '../../core/Null';
 import ProxyLink from '../../core/ProxyLink';
-import { getImageDimensions } from '../../helpers/utils/imageDimensions';
-
-const { string, object, bool } = PropTypes;
+const noop = () => null;
+const { string, object, bool, func } = PropTypes;
 
 const getIconComponent = (prop) => {
   const {
-    iconContainerStyle,
+    overlayIconContainerStyle,
     iconText,
     iconTextStyle,
     icon,
@@ -20,16 +19,16 @@ const getIconComponent = (prop) => {
   let markup;
   if (icon) {
     markup = (
-      <div style={iconContainerStyle}>
+      <div style={overlayIconContainerStyle}>
         <Icon name={icon} />
         {iconText ? <Text content={iconText} style={iconTextStyle} /> : Null}
       </div>
     );
   } else {
-    markup = Null;
+    markup = false;
   }
 
-  return markup;
+  return markup || <Null />;
 };
 
 const getTitleContainer = (title, titleStyle) => {
@@ -37,10 +36,10 @@ const getTitleContainer = (title, titleStyle) => {
   if (title) {
     markup = (<Heading type="h1" headingText={title} style={titleStyle} />);
   } else {
-    markup = Null;
+    markup = false;
   }
 
-  return markup;
+  return markup || <Null />;
 };
 
 const getSubtitleContainer = (subtitle, subtitleStyle) => {
@@ -48,10 +47,10 @@ const getSubtitleContainer = (subtitle, subtitleStyle) => {
   if (subtitle) {
     markup = (<Heading type="h3" headingText={subtitle} style={subtitleStyle} />);
   } else {
-    markup = Null;
+    markup = false;
   }
 
-  return markup;
+  return markup || <Null />;
 };
 
 const getTextContainer = (text, textStyle) => {
@@ -59,16 +58,17 @@ const getTextContainer = (text, textStyle) => {
   if (text) {
     markup = (<Text style={textStyle} content={text} />);
   } else {
-    markup = Null;
+    markup = false;
   }
 
-  return markup;
+  return markup || <Null />;
 };
 
 const getLinkContainer = (comp) => {
   const {
   overlayProxyLinkStyle,
   linkText,
+  linkTextColor,
   linkUrl,
   linkFontWeight,
   linkFontSize,
@@ -83,38 +83,30 @@ const getLinkContainer = (comp) => {
         linkFontSize={linkFontSize}
         linkFontWeight={linkFontWeight}
         linkTextDecoration={linkTextDecoration}
+        textColor={linkTextColor}
         onClickEvent={comp.hideTextOverlay}
       />
     </div>);
   } else {
-    markup = Null;
+    markup = false;
   }
 
-  return markup;
+  return markup || <Null />;
 };
 
 class HeroVariationOverlay extends Component {
 
+  static defaultProps = {
+    callOverlay: noop,
+  };
+
   state = {
-    imageWidth: '100%',
-    imageHeight: '100%',
     showOverlay: true,
   };
 
-  onImageLoaded = () => {
-    const imgRef = this.refs.heroImage;
-    const imageDimensions = getImageDimensions(
-      imgRef.childNodes[0].naturalHeight,
-      imgRef.childNodes[0].naturalWidth,
-      imgRef.clientHeight,
-      imgRef.clientWidth
-    );
-    this.setState({ ...imageDimensions });
-  };
-
   hideTextOverlay = () => {
-    console.log('here');
     if (this.props.navToOverlayComp) {
+      this.props.callOverlay(true);
       this.setState({ showOverlay: false });
     }
   };
@@ -123,7 +115,6 @@ class HeroVariationOverlay extends Component {
     const {
       className,
       imageSrc,
-      imageTitle,
       rootStyle,
       subtitle,
       subtitleStyle,
@@ -135,30 +126,15 @@ class HeroVariationOverlay extends Component {
       textOverlay,
     } = this.props;
 
-    const {
-      imageWidth,
-      imageHeight,
-      marginTop,
-      marginLeft,
-    } = this.state;
-
     const imgContainer = mergeStyles(rootStyle, imageContainerStyle);
     return (
       <div
         style={imgContainer}
         className={className}
-        ref="heroImage"
       >
         <Image
-          onLoad={this.onImageLoaded}
           source={imageSrc}
-          style={{
-            width: imageWidth,
-            height: imageHeight,
-            marginTop,
-            marginLeft,
-          }}
-          alternateText={imageTitle}
+          useImgTag={false}
         />
         { this.state.showOverlay ?
           <div style={textOverlay}>
@@ -168,7 +144,7 @@ class HeroVariationOverlay extends Component {
             {getIconComponent(this.props)}
             {getLinkContainer(this)}
           </div> :
-          Null}
+          <Null />}
       </div>
     );
   }
@@ -177,7 +153,6 @@ class HeroVariationOverlay extends Component {
 HeroVariationOverlay.propTypes = {
   className: string,
   imageSrc: string.isRequired,
-  imageTitle: string,
   rootStyle: object,
   subtitle: string,
   subtitleStyle: object,
@@ -193,11 +168,14 @@ HeroVariationOverlay.propTypes = {
   textOverlay: object,
   overlayProxyLinkStyle: object,
   linkText: string,
+  linkTextColor: string,
   linkUrl: string,
   linkFontWeight: string,
   linkFontSize: string,
   linkTextDecoration: string,
   navToOverlayComp: bool,
+  overlayIconContainerStyle: object,
+  callOverlay: func,
 };
 
 export default HeroVariationOverlay;

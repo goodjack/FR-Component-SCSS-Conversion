@@ -1,4 +1,5 @@
 import request from 'superagent';
+import fetchJsonp from 'fetch-jsonp';
 
 export const getApiDetail =
 function getApiDetail(queryData, successCallback, failureCallback) {
@@ -21,10 +22,12 @@ function getApiDetail(queryData, successCallback, failureCallback) {
   .end((error, result) => {
     if (error) {
       if (error.status === 404) {
-        console.log(404);
-        failureCallback(error.status);
+        console.error(404);
       } else {
-        console.log('Catelog API failed ', error.message || error.status);
+        console.error('Catelog API failed ', error.message || error.status);
+      }
+
+      if (failureCallback) {
         failureCallback(error.status);
       }
     } else {
@@ -33,4 +36,37 @@ function getApiDetail(queryData, successCallback, failureCallback) {
     }
   });
 
+};
+
+export const getPostDetails = (id, type, successCallback, failureCallback) => {
+  request.get(`/social/${type}`)
+  .query({ id })
+  .accept('application/json')
+  .end((error, result) => {
+    if (error) {
+      if (error.status === 404) {
+        console.error(404);
+      } else {
+        console.error(`/${type} API failed`, error.message || error.status);
+      }
+
+      if (failureCallback) {
+        failureCallback(error.status);
+      }
+    } else {
+      const parsedData = JSON.parse(result.text);
+      successCallback(parsedData);
+    }
+  });
+};
+
+export const jsonpGetRequest = (requestUrl, successCallback, failureCallback) => {
+  fetchJsonp(requestUrl)
+  .then((response) =>
+   response.json()
+  ).then((json) =>
+    successCallback(json)
+  ).catch((err) =>
+    failureCallback(err)
+  );
 };

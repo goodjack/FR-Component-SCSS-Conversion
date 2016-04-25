@@ -10,12 +10,13 @@ describe('TapableGrid', () => {
 
   it('should capture props is passed', () => {
     const render = TestUtils.renderIntoDocument(
-      <TapableGrid cellPadding={0} columns={2} cellHeight={100} cellWidth={200} variation="normal">
+      <TapableGrid horizontalSpacing={0} columns={2} cellHeight={100} cellWidth={200} variation="regular">
         <TapableItem />
         <TapableItem />
       </TapableGrid>
     );
-    expect(render.props.cellPadding).to.equal(0);
+    expect(render.props.variation).to.equal('regular');
+    expect(render.props.horizontalSpacing).to.equal(0);
     expect(render.props.columns).to.equal(2);
     expect(render.props.cellHeight).to.equal(100);
     expect(render.props.cellWidth).to.equal(200);

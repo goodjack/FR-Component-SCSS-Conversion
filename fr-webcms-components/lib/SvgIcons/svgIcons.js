@@ -60,6 +60,10 @@ var _NavigationClose = require('./navigation/NavigationClose');
 
 var _NavigationClose2 = _interopRequireDefault(_NavigationClose);
 
+var _Instagram = require('./social/Instagram');
+
+var _Instagram2 = _interopRequireDefault(_Instagram);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var svgIcons = {
@@ -76,7 +80,8 @@ var svgIcons = {
   NavigationArrowDropDown: _ArrowDropDown2.default,
   NavigationArrowDropUp: _ArrowDropUp2.default,
   NavigationChevronDown: _ChevronDown2.default,
-  NavigationClose: _NavigationClose2.default
+  NavigationClose: _NavigationClose2.default,
+  Instagram: _Instagram2.default
 };
 
 exports.default = svgIcons;

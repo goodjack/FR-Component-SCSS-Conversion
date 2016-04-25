@@ -12,32 +12,38 @@ import Youtube from '../../core/Youtube';
 import Button from '../../Button';
 import Null from '../../core/Null';
 
-const { string, object } = PropTypes;
+const { string, object, oneOf, bool } = PropTypes;
 
 const getRelevantContextKeys = (compTheme) => {
   const hmTheme = compTheme && compTheme.heroMovie || {};
   return { ...hmTheme };
 };
 
-const getStyles = (themeAndConfig) => {
+const getStyles = (themeAndConfig, props) => {
   const {
     compTheme,
   } = themeAndConfig;
+
+  const {
+    splitView,
+    textPosition,
+    iconPosition,
+  } = props;
+
+  const textOrder = (textPosition === 'top' || textPosition === 'left') ? 1 : 2;
+  const imgOrder = (textOrder === 1) ? 2 : 1;
+
   const heroMovie = getRelevantContextKeys(compTheme);
   return {
     root: {
       position: 'relative',
-      width: 960,
-      height: 500,
-      borderColor: heroMovie.borderColor,
-      borderWidth: '1',
-      padding: '1',
-      borderStyle: 'solid',
       cursor: 'pointer',
+      display: 'flex',
+      flexDirection: splitView ? 'row' : 'column',
     },
     youtubeVideoSize: {
-      width: 960,
-      height: 500,
+      width: 'auto',
+      height: 300,
     },
     modalBodyStyle: {
       backgroundColor: 'transparent',
@@ -48,10 +54,11 @@ const getStyles = (themeAndConfig) => {
     },
     playIconContainer: {
       position: 'absolute',
-      right: 20,
-      width: 60,
-      top: 20,
-      margin: 0,
+      margin: '3px 0px',
+      left: (iconPosition.indexOf('left') > -1) ? 0 : 'initial',
+      right: (iconPosition.indexOf('right') > -1) ? 0 : 'initial',
+      bottom: (iconPosition.indexOf('bottom') > -1) ? 0 : 'initial',
+      top: (iconPosition.indexOf('top') > -1) ? 0 : 'initial',
     },
     playIconTextStyle: {
       color: heroMovie.iconTextColor || 'white',
@@ -59,15 +66,37 @@ const getStyles = (themeAndConfig) => {
       fontFamily: heroMovie.fontFamily,
     },
     iconButtonStyle: {
-      position: 'relative',
-      backgroundColor: heroMovie.iconBackground || 'rgba(255, 255, 255, 0.6)',
-      height: 60,
-      width: '100%',
-      padding: '0px',
+      padding: 5,
+      backgroundColor: '#000',
+      height: !splitView ? 50 : 25,
+      width: !splitView ? 50 : 25,
       textAlign: 'center',
+    },
+    iconImage: {
+      maxHeight: '60%',
+      maxWidth: '60%',
     },
     iconHoverStyle: {
       backgroundColor: heroMovie.iconHoverColor || 'rgba(255, 0, 0, .6)',
+    },
+    thumbnail: {
+      order: imgOrder,
+      position: 'relative',
+      padding: '4%',
+      flex: 1,
+    },
+    imageWrapper: {
+      position: 'relative',
+    },
+    description: {
+      order: textOrder,
+      fontSize: 16,
+      margin: 'auto',
+      paddingBottom: (textOrder === 2) && !splitView ? '4%' : 0,
+      paddingTop: (textOrder === 1) && !splitView ? '4%' : 0,
+      paddingRight: (textOrder === 2) || !splitView ? '4%' : 0,
+      paddingLeft: (textOrder === 1) || !splitView ? '4%' : 0,
+      flex: splitView ? 1.5 : 1,
     },
   };
 };
@@ -80,7 +109,7 @@ const getIconElement = (styles, iconSrc) => {
 
   return (
     <Button {...buttonProps} >
-      <Image source={iconSrc} />
+      <Image source={iconSrc} style={styles.iconImage}/>
     </Button>
   );
 };
@@ -95,13 +124,23 @@ class HeroMovie extends Component {
     imageTitle: string,
     playButtonStyle: object,
     style: object,
-    text: string,
+    iconText: string,
     videoId: string.isRequired,
+    splitView: bool,
+    iconPosition: oneOf(['left-top', 'left-bottom', 'right-top', 'right-bottom', 'center']),
+    variation: oneOf(['mobile', 'desktop']),
+    textPosition: oneOf(['top', 'bottom', 'right', 'left']),
+    description: string,
   };
 
   static contextTypes = {
     compTheme: object,
     compConfig: object,
+  };
+
+  static defaultProps = {
+    iconPosition: 'left-bottom',
+    variation: 'mobile',
   };
 
   state = {
@@ -128,13 +167,17 @@ class HeroMovie extends Component {
       imageSrc,
       imageTitle,
       videoId,
-      text,
+      iconText,
+      description,
     } = this.props;
+
     const rootId = id;
-    const styles = getStyles(this.themeAndConfig);
+    const styles = getStyles(this.themeAndConfig, this.props);
     const iconElement = getIconElement(styles, iconSrc);
     const rootStyle = mergeStyles(styles.root, style);
     const iconTextStyle = mergeStyles(styles.playIconContainer, playButtonStyle);
+    const descriptionStyle = styles.description;
+    const thumbnailStyle = styles.thumbnail;
 
     return (
       <div
@@ -143,23 +186,36 @@ class HeroMovie extends Component {
         className={className}
         onClick={this.handleClickEvent}
       >
-        <div style={iconTextStyle} >
-          {iconElement}
+        {
+          description &&
           <Text
-            style={styles.playIconTextStyle}
-            content={text}
+            style={descriptionStyle}
+            content={description}
           />
+        }
+        <div style={thumbnailStyle}>
+          <h1 style={styles.imageWrapper}>
+            <div style={iconTextStyle} >
+              {iconElement}
+              <Text
+                style={styles.playIconTextStyle}
+                content={iconText}
+              />
+            </div>
+            <Image
+              source={imageSrc}
+              alternateText={imageTitle}
+              style={styles.image}
+            />
+          </h1>
         </div>
-        <h1>
-          <Image
-            source={imageSrc}
-            alternateText={imageTitle}
-            style={styles.image}
-          />
-        </h1>
-        {showVideo ? <Modal dialogStyle={styles.youtubeVideoSize} bodyStyle={styles.modalBodyStyle}>
-          <Youtube source={videoId} allowAutoplay />
-        </Modal> : Null}
+        {
+          showVideo ?
+          <Modal dialogStyle={styles.youtubeVideoSize} bodyStyle={styles.modalBodyStyle}>
+            <Youtube source={videoId} allowAutoplay />
+          </Modal>
+          : Null
+        }
       </div>
     );
   }

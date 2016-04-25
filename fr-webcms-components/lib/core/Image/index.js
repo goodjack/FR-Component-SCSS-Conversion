@@ -6,13 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _uniqueId = require('../../helpers/utils/uniqueId');
-
-var _uniqueId2 = _interopRequireDefault(_uniqueId);
 
 var _stylePropable = require('../../helpers/utils/stylePropable');
 
@@ -27,12 +25,62 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var string = _react.PropTypes.string;
 var func = _react.PropTypes.func;
 var object = _react.PropTypes.object;
+var bool = _react.PropTypes.bool;
+var oneOfType = _react.PropTypes.oneOfType;
+var number = _react.PropTypes.number;
 
 
 var styles = {
   imageStyle: {
     border: 'none'
   }
+};
+
+var getMarkup = function getMarkup(comp) {
+  var _comp$props = comp.props;
+  var alternateText = _comp$props.alternateText;
+  var className = _comp$props.className;
+  var source = _comp$props.source;
+  var style = _comp$props.style;
+  var useImgTag = _comp$props.useImgTag;
+  var _comp$props2 = comp.props;
+  var width = _comp$props2.width;
+  var height = _comp$props2.height;
+
+
+  if (!width && !height) {
+    width = height = '100%';
+  }
+
+  var computedImageStyle = _extends({
+    position: 'relative',
+    backgroundImage: 'url(\'' + source + '\')',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    width: width,
+    height: height
+  }, style);
+  var markup = void 0;
+  if (useImgTag) {
+    var mergedStyle = (0, _stylePropable.mergeStyles)({ width: width, height: height }, style);
+    mergedStyle = (0, _stylePropable.mergeStyles)(styles.imageStyle, mergedStyle);
+    markup = _react2.default.createElement('img', {
+      className: className,
+      src: source,
+      style: mergedStyle,
+      alt: alternateText,
+      onLoad: comp.handleOnLoad,
+      onClick: comp.handleOnClick
+    });
+  } else {
+    markup = _react2.default.createElement('div', {
+      style: computedImageStyle,
+      onClick: comp.handleOnClick
+    });
+  }
+
+  return markup;
 };
 
 var Image = function (_Component) {
@@ -51,35 +99,15 @@ var Image = function (_Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Image)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.handleOnLoad = function (event) {
       if (_this.props.onLoad) _this.props.onLoad(event);
+    }, _this.handleOnClick = function (event) {
+      if (_this.props.onClick) _this.props.onClick(event);
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Image, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this._uniqueId = _uniqueId2.default.generate();
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var alternateText = _props.alternateText;
-      var className = _props.className;
-      var id = _props.id;
-      var source = _props.source;
-      var style = _props.style;
-
-
-      var inputId = id || this._uniqueId;
-
-      return _react2.default.createElement('img', {
-        className: className,
-        id: inputId,
-        src: source,
-        style: (0, _stylePropable.mergeStyles)(styles.imageStyle, style),
-        alt: alternateText,
-        onLoad: this.handleOnLoad
-      });
+      return getMarkup(this);
     }
   }]);
 
@@ -89,15 +117,19 @@ var Image = function (_Component) {
 Image.propTypes = {
   alternateText: string,
   className: string,
-  id: string,
   onLoad: func,
+  onClick: func,
   source: string,
-  style: object
+  style: object,
+  useImgTag: bool,
+  width: oneOfType([string, number]),
+  height: oneOfType([string, number])
 };
 Image.defaultProps = {
   source: '',
   onLoad: function onLoad() {
     return null;
-  }
+  },
+  useImgTag: true
 };
 exports.default = Image;

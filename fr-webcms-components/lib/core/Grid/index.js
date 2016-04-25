@@ -94,12 +94,13 @@ var Grid = function (_Component) {
       var _props = this.props;
       var cellHeight = _props.cellHeight;
       var cellWidth = _props.cellWidth;
-      var cellPadding = _props.cellPadding;
+      var verticalSpacing = _props.verticalSpacing;
+      var horizontalSpacing = _props.horizontalSpacing;
       var children = _props.children;
       var maxCols = _props.maxCols;
       var style = _props.style;
 
-      var other = _objectWithoutProperties(_props, ['cellHeight', 'cellWidth', 'cellPadding', 'children', 'maxCols', 'style']);
+      var other = _objectWithoutProperties(_props, ['cellHeight', 'cellWidth', 'verticalSpacing', 'horizontalSpacing', 'children', 'maxCols', 'style']);
 
       var _context = this.context;
       var compContextTheme = _context.compTheme;
@@ -117,12 +118,11 @@ var Grid = function (_Component) {
 
       var columns = maxCols || gridContext.maxCols || 12;
 
-      var padding = void 0;
-      if (cellPadding === 0) {
-        padding = 0;
-      } else {
-        padding = cellPadding || gridContext.cellPadding || 10;
-      }
+      var vSpacing = verticalSpacing || gridContext.verticalSpacing || 10;
+      var hSpacing = horizontalSpacing || gridContext.horizontalSpacing || 10;
+
+      var vPadding = verticalSpacing === 0 ? 0 : vSpacing;
+      var hPadding = horizontalSpacing === 0 ? 0 : hSpacing;
 
       var mergedRootStyles = (0, _stylePropable.mergeStyles)(styles.root, style);
 
@@ -131,17 +131,17 @@ var Grid = function (_Component) {
         var childCols = currentChild.props.colSpan || gridCellContext.colSpan || 1;
         var childRows = currentChild.props.rowSpan || gridCellContext.rowSpan;
 
-        var childWidth = cellWidth ? cellWidth * childCols + padding : 100 / columns * childCols + '%';
+        var childWidth = cellWidth ? cellWidth * childCols + hPadding : 100 / columns * childCols + '%';
 
         var itemStyle = (0, _stylePropable.mergeStyles)(styles.item, {
           width: childWidth,
-          paddingRight: padding,
-          paddingBottom: padding
+          paddingRight: hPadding,
+          paddingBottom: vPadding
         });
 
         if (cellHeight && childRows) {
           itemStyle = (0, _stylePropable.mergeStyles)(itemStyle, {
-            height: cellHeight * childRows + padding
+            height: cellHeight * childRows + vPadding
           });
         }
 
@@ -168,6 +168,8 @@ var Grid = function (_Component) {
 Grid.propTypes = {
   cellHeight: number,
   cellWidth: number,
+  verticalSpacing: number,
+  horizontalSpacing: number,
   cellPadding: number,
   children: any,
   maxCols: number,

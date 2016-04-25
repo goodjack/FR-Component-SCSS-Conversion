@@ -163,4 +163,39 @@ export default {
     return ~~(this.monthDiff(d1, d2) / 12);
   },
 
+  getDateDiffText(d1, d2) {
+    const dateDiff = d1 - d2;
+    const min = 1000 * 60;
+    const hour = min * 60;
+    const day = hour * 24;
+    const diffByDay = dateDiff / day;
+    const mf = Math.floor;
+    let diffVal;
+    let dateDiffText;
+    if (mf((dateDiff / day) / 30) > 11) {
+      diffVal = mf(diffByDay / (30 * 12));
+      dateDiffText = `${diffVal} years ago`;
+    } else if (mf(diffByDay / 30) > 0) {
+      diffVal = mf(diffByDay / 30);
+      dateDiffText = `${diffVal} months ago`;
+    } else if (mf(dateDiff / day) > 7) {
+      diffVal = mf((dateDiff / (day * 7)));
+      dateDiffText = `${diffVal} weeks ago`;
+    } else if (mf(dateDiff / day) > 0) {
+      diffVal = mf((dateDiff / day));
+      dateDiffText = `${diffVal} days ago`;
+    } else if (mf(dateDiff / hour) > 0) {
+      diffVal = mf((dateDiff / hour));
+      dateDiffText = `${diffVal} hours ago`;
+    } else if (mf((dateDiff / min)) > 0) {
+      diffVal = mf((dateDiff / min));
+      dateDiffText = `${diffVal} minutes ago`;
+    } else {
+      diffVal = mf((dateDiff / 1000));
+      dateDiffText = `${diffVal} seconds ago`;
+    }
+
+    return dateDiffText;
+  },
+
 };

@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import Image from '../Image';
+import Noop from '../Null';
 import { mergeStyles } from '../../helpers/utils/stylePropable';
 
 const {
@@ -8,6 +10,7 @@ const {
   number,
   func,
   bool,
+  string,
 } = PropTypes;
 let totalWidth;
 
@@ -43,6 +46,7 @@ const prepareStyle = (me) => {
       display: 'flex',
       flexFlow: 'column nowrap',
       overflow: 'hidden',
+      position: 'relative',
     },
     swipeItem: {
       width: !pan ? `${100 / display}%` : 'auto',
@@ -51,6 +55,45 @@ const prepareStyle = (me) => {
   };
 
   return styles;
+};
+
+const getNavigation = (me) => {
+  const {
+    nextIcon,
+    previousIcon,
+    nextStyle,
+    previousStyle,
+  } = me.props;
+  const navigation = {
+    next: Noop,
+    previous: Noop,
+  };
+  const mergedNext = mergeStyles({
+    position: 'absolute',
+    width: '30px',
+    height: '35px',
+    top: '40%',
+    right: 0,
+    zIndex: 5,
+  }, nextStyle);
+  const mergedPrevous = mergeStyles({
+    position: 'absolute',
+    width: '30px',
+    height: '35px',
+    top: '40%',
+    left: 0,
+    zIndex: 5,
+  }, previousStyle);
+  const index = me.state.selectedIndex;
+  if (nextIcon && me.props.children.length - 1 > index) {
+    navigation.next = <Image source={nextIcon} onClick={me.goNext} style={mergedNext} />;
+  }
+
+  if (previousIcon && index > 0) {
+    navigation.previous = <Image source={previousIcon} onClick={me.goPrevious} style={mergedPrevous} />;
+  }
+
+  return navigation;
 };
 
 const selectIndex = (me, selectedIndex) => {
@@ -139,6 +182,10 @@ class Swipable extends Component {
     display: number,
     pan: bool,
     speed: number,
+    leftNavIcon: string,
+    rightNavIcon: string,
+    nextStyle: object,
+    previousStyle: object,
   };
 
   static defaultProps = {
@@ -193,6 +240,14 @@ class Swipable extends Component {
     }, _this.transitionTo(selectedIndex));
   };
 
+  goNext = () => {
+    selectIndex(this, this.state.selectedIndex + 1);
+  };
+
+  goPrevious = () => {
+    selectIndex(this, this.state.selectedIndex - 1);
+  };
+
   render() {
     const _this = this;
     const {
@@ -204,7 +259,7 @@ class Swipable extends Component {
     let children = _this.children;
     children = Array.isArray(children) ? children : [children];
     const rootStyle = mergeStyles(swipeContainer, _this.props.style);
-
+    const navigation = getNavigation(_this);
     return (
       <div style={rootStyle}>
          <div
@@ -221,6 +276,7 @@ class Swipable extends Component {
                </div>
            )}
          </div>
+         {navigation.previous} {navigation.next}
        </div>
     );
   }

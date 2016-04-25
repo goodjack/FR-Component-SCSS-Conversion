@@ -138,5 +138,39 @@ exports.default = {
   },
   yearDiff: function yearDiff(d1, d2) {
     return ~ ~(this.monthDiff(d1, d2) / 12);
+  },
+  getDateDiffText: function getDateDiffText(d1, d2) {
+    var dateDiff = d1 - d2;
+    var min = 1000 * 60;
+    var hour = min * 60;
+    var day = hour * 24;
+    var diffByDay = dateDiff / day;
+    var mf = Math.floor;
+    var diffVal = void 0;
+    var dateDiffText = void 0;
+    if (mf(dateDiff / day / 30) > 11) {
+      diffVal = mf(diffByDay / (30 * 12));
+      dateDiffText = diffVal + ' years ago';
+    } else if (mf(diffByDay / 30) > 0) {
+      diffVal = mf(diffByDay / 30);
+      dateDiffText = diffVal + ' months ago';
+    } else if (mf(dateDiff / day) > 7) {
+      diffVal = mf(dateDiff / (day * 7));
+      dateDiffText = diffVal + ' weeks ago';
+    } else if (mf(dateDiff / day) > 0) {
+      diffVal = mf(dateDiff / day);
+      dateDiffText = diffVal + ' days ago';
+    } else if (mf(dateDiff / hour) > 0) {
+      diffVal = mf(dateDiff / hour);
+      dateDiffText = diffVal + ' hours ago';
+    } else if (mf(dateDiff / min) > 0) {
+      diffVal = mf(dateDiff / min);
+      dateDiffText = diffVal + ' minutes ago';
+    } else {
+      diffVal = mf(dateDiff / 1000);
+      dateDiffText = diffVal + ' seconds ago';
+    }
+
+    return dateDiffText;
   }
 };

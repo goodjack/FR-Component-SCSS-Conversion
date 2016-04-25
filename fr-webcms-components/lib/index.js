@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Icon = exports.Filter = exports.Youtube = exports.UqLabel = exports.TileButton = exports.TextInput = exports.Text = exports.TabbedCarousel = exports.Tabs = exports.Tab = exports.SwipableNavItem = exports.SwipableNav = exports.Swipable = exports.SectionTitle = exports.SectionImage = exports.SectionAnchorBarItem = exports.SectionAnchorBar = exports.SearchBox = exports.RollOverImage = exports.Rating = exports.RadioButtonGroup = exports.RadioButton = exports.ProductGrid = exports.PickerOption = exports.Picker = exports.NavHead = exports.Modal = exports.ListItem = exports.List = exports.Label = exports.ImageTile = exports.Image = exports.IconButton = exports.HeroMovie = exports.Hero = exports.Heading = exports.GridCell = exports.Grid = exports.FilmStripItem = exports.FilmStrip = exports.Fillers = exports.FavoriteButton = exports.EnhancedSwitch = exports.EnhancedSelect = exports.EnhancedOption = exports.Divider = exports.Coordinate = exports.Container = exports.ColorPicker = exports.CollageItem = exports.Collage = exports.ChipChild = exports.Chip = exports.CheckBox = exports.CarouselTile = exports.CarouselHead = exports.Carousel = exports.ButtonTile = exports.Button = exports.BreadCrumbs = exports.BreadCrumb = exports.Badge = exports.AnchorButton = exports.AccordionItem = exports.Accordion = exports.Configuration = exports.Utils = exports.Mixins = exports.Styles = undefined;
+exports.Icon = exports.Filter = exports.Youtube = exports.UqLabel = exports.TileButton = exports.ThisOrThat = exports.SocialMediaPost = exports.TextInput = exports.Text = exports.TapableItem = exports.TapableGrid = exports.TabbedCarousel = exports.Tabs = exports.Tab = exports.SwipableNavItem = exports.SwipableNav = exports.Swipable = exports.SectionTitle = exports.SectionImage = exports.SectionAnchorBarItem = exports.SectionAnchorBar = exports.SearchBox = exports.RollOverImage = exports.Rating = exports.RadioButtonGroup = exports.RadioButton = exports.ProxyLink = exports.ProductGrid = exports.PickerOption = exports.Picker = exports.NavHead = exports.Modal = exports.ListItem = exports.List = exports.Label = exports.Instagram = exports.ImageTile = exports.ImagePlusText = exports.Image = exports.IconHead = exports.IconButton = exports.HeroMovie = exports.Hero = exports.Heading = exports.GridCell = exports.Grid = exports.FilmStripItem = exports.FilmStrip = exports.Fillers = exports.FavoriteButton = exports.EnhancedSwitch = exports.EnhancedSelect = exports.EnhancedOption = exports.Divider = exports.Coordinate = exports.Container = exports.ColorPicker = exports.CollageItem = exports.Collage = exports.ChipChild = exports.Chip = exports.CheckBox = exports.CarouselTile = exports.CarouselHead = exports.Carousel = exports.ButtonTile = exports.Overlay = exports.Button = exports.BreadCrumbs = exports.BreadCrumb = exports.Badge = exports.AnchorButton = exports.AccordionItem = exports.Accordion = exports.Configuration = exports.Utils = exports.Mixins = exports.Styles = undefined;
 
 var _mixins = require('./helpers/mixins');
 
@@ -137,9 +137,21 @@ var _IconButton = require('./IconButton');
 
 var _IconButton2 = _interopRequireDefault(_IconButton);
 
+var _IconHead = require('./core/IconHead');
+
+var _IconHead2 = _interopRequireDefault(_IconHead);
+
+var _ImagePlusText = require('./uniqlo/ImagePlusText');
+
+var _ImagePlusText2 = _interopRequireDefault(_ImagePlusText);
+
 var _ImageTile = require('./ImageTile');
 
 var _ImageTile2 = _interopRequireDefault(_ImageTile);
+
+var _Instagram = require('./core/Instagram');
+
+var _Instagram2 = _interopRequireDefault(_Instagram);
 
 var _Label = require('./Label');
 
@@ -161,6 +173,10 @@ var _ProductGrid = require('./ProductGrid');
 
 var _ProductGrid2 = _interopRequireDefault(_ProductGrid);
 
+var _ProxyLink = require('./core/ProxyLink');
+
+var _ProxyLink2 = _interopRequireDefault(_ProxyLink);
+
 var _RadioButton = require('./core/RadioButtonGroup/RadioButton');
 
 var _RadioButton2 = _interopRequireDefault(_RadioButton);
@@ -172,6 +188,10 @@ var _RadioButtonGroup2 = _interopRequireDefault(_RadioButtonGroup);
 var _Rating = require('./Rating');
 
 var _Rating2 = _interopRequireDefault(_Rating);
+
+var _Overlay = require('./Overlay');
+
+var _Overlay2 = _interopRequireDefault(_Overlay);
 
 var _RollOverImage = require('./RollOverImage');
 
@@ -213,6 +233,14 @@ var _TabbedCarousel = require('./TabbedCarousel');
 
 var _TabbedCarousel2 = _interopRequireDefault(_TabbedCarousel);
 
+var _TapableGrid = require('./uniqlo/TapableGrid');
+
+var _TapableGrid2 = _interopRequireDefault(_TapableGrid);
+
+var _TapableItem = require('./uniqlo/TapableGrid/TapableItem');
+
+var _TapableItem2 = _interopRequireDefault(_TapableItem);
+
 var _Text = require('./Text');
 
 var _Text2 = _interopRequireDefault(_Text);
@@ -220,6 +248,14 @@ var _Text2 = _interopRequireDefault(_Text);
 var _TextInput = require('./TextInput');
 
 var _TextInput2 = _interopRequireDefault(_TextInput);
+
+var _SocialMediaPost = require('./uniqlo/SocialMediaPost');
+
+var _SocialMediaPost2 = _interopRequireDefault(_SocialMediaPost);
+
+var _ThisOrThat = require('./uniqlo/ThisOrThat');
+
+var _ThisOrThat2 = _interopRequireDefault(_ThisOrThat);
 
 var _UqLabel = require('./uniqlo/UqLabel');
 
@@ -239,8 +275,6 @@ var _Icon2 = _interopRequireDefault(_Icon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Core Components
-// Uniqlo UI
 exports.Styles = _styles2.default;
 exports.Mixins = _mixins2.default;
 exports.Utils = _utils2.default;
@@ -252,6 +286,7 @@ exports.Badge = _Badge2.default;
 exports.BreadCrumb = _BreadCrumbs.BreadCrumb;
 exports.BreadCrumbs = _BreadCrumbs2.default;
 exports.Button = _Button2.default;
+exports.Overlay = _Overlay2.default;
 exports.ButtonTile = _ButtonTile2.default;
 exports.Carousel = _Carousel2.default;
 exports.CarouselHead = _Carousel.CarouselHead;
@@ -278,8 +313,11 @@ exports.Heading = _Heading2.default;
 exports.Hero = _Hero2.default;
 exports.HeroMovie = _HeroMovie2.default;
 exports.IconButton = _IconButton2.default;
+exports.IconHead = _IconHead2.default;
 exports.Image = _Image2.default;
+exports.ImagePlusText = _ImagePlusText2.default;
 exports.ImageTile = _ImageTile2.default;
+exports.Instagram = _Instagram2.default;
 exports.Label = _Label2.default;
 exports.List = _List2.default;
 exports.ListItem = _List.ListItem;
@@ -288,6 +326,7 @@ exports.NavHead = _Carousel.NavHead;
 exports.Picker = _Picker2.default;
 exports.PickerOption = _Picker.PickerOption;
 exports.ProductGrid = _ProductGrid2.default;
+exports.ProxyLink = _ProxyLink2.default;
 exports.RadioButton = _RadioButton2.default;
 exports.RadioButtonGroup = _RadioButtonGroup2.default;
 exports.Rating = _Rating2.default;
@@ -303,13 +342,21 @@ exports.SwipableNavItem = _SwipableNav.SwipableNavItem;
 exports.Tab = _Tabs.Tab;
 exports.Tabs = _Tabs2.default;
 exports.TabbedCarousel = _TabbedCarousel2.default;
+exports.TapableGrid = _TapableGrid2.default;
+exports.TapableItem = _TapableItem2.default;
 exports.Text = _Text2.default;
 exports.TextInput = _TextInput2.default;
+exports.SocialMediaPost = _SocialMediaPost2.default;
+exports.ThisOrThat = _ThisOrThat2.default;
 exports.TileButton = _TileButton2.default;
 exports.UqLabel = _UqLabel2.default;
 exports.Youtube = _Youtube2.default;
 exports.Filter = _Filter2.default;
 exports.Icon = _Icon2.default;
+
+// Core Components
+// Uniqlo UI
+
 exports.default = {
   Styles: _styles2.default,
   Mixins: _mixins2.default,
@@ -327,6 +374,7 @@ exports.default = {
   CarouselHead: _Carousel.CarouselHead,
   CarouselTile: _Carousel.CarouselTile,
   CheckBox: _CheckBox2.default,
+  Overlay: _Overlay2.default,
   Chip: _Chip2.default,
   ChipChild: _ChipChild2.default,
   Collage: _Collage2.default,
@@ -348,8 +396,11 @@ exports.default = {
   Hero: _Hero2.default,
   HeroMovie: _HeroMovie2.default,
   IconButton: _IconButton2.default,
+  IconHead: _IconHead2.default,
   Image: _Image2.default,
+  ImagePlusText: _ImagePlusText2.default,
   ImageTile: _ImageTile2.default,
+  Instagram: _Instagram2.default,
   Label: _Label2.default,
   List: _List2.default,
   ListItem: _List.ListItem,
@@ -358,6 +409,7 @@ exports.default = {
   Picker: _Picker2.default,
   PickerOption: _Picker.PickerOption,
   ProductGrid: _ProductGrid2.default,
+  ProxyLink: _ProxyLink2.default,
   RadioButton: _RadioButton2.default,
   RadioButtonGroup: _RadioButtonGroup2.default,
   Rating: _Rating2.default,
@@ -375,7 +427,9 @@ exports.default = {
   TabbedCarousel: _TabbedCarousel2.default,
   Text: _Text2.default,
   TextInput: _TextInput2.default,
+  ThisOrThat: _ThisOrThat2.default,
   TileButton: _TileButton2.default,
+  SocialMediaPost: _SocialMediaPost2.default,
   UqLabel: _UqLabel2.default,
   Youtube: _Youtube2.default,
   Filter: _Filter2.default,

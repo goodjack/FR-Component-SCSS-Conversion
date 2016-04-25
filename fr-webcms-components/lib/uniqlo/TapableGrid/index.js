@@ -12,7 +12,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _stylePropable = require('../../helpers/utils/stylePropable');
 
-var _Grid = require('core/Grid');
+var _Grid = require('../../core/Grid');
 
 var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -31,8 +31,46 @@ var any = _react.PropTypes.any;
 
 var styles = {
   root: {
-    paddingTop: 15
+    paddingLeft: '4%',
+    paddingTop: '4%'
   }
+};
+
+var wrapWithGrid = function wrapWithGrid(columnElements) {
+  return _react2.default.createElement(
+    _Grid2.default,
+    {
+      maxCols: 1,
+      horizontalSpacing: 0,
+      verticalSpacing: 15
+    },
+    columnElements
+  );
+};
+
+var getIrregularChildren = function getIrregularChildren(children, columns, variation) {
+
+  var allChildren = _react2.default.Children.map(children, function (child) {
+    return _react2.default.cloneElement(child, { variation: variation });
+  });
+
+  var firstColumn = [];
+  var secondColumn = [];
+
+  var index = 0;
+
+  while (index < allChildren.length) {
+    if ((index + 2) % 2 === 0) {
+      firstColumn.push(allChildren[index]);
+    } else {
+      secondColumn.push(allChildren[index]);
+    }
+
+    index++;
+  }
+
+  var irregularChildren = [wrapWithGrid(firstColumn), wrapWithGrid(secondColumn)];
+  return irregularChildren;
 };
 
 var TapableGrid = function (_Component) {
@@ -50,23 +88,30 @@ var TapableGrid = function (_Component) {
       var _props = this.props;
       var cellHeight = _props.cellHeight;
       var cellWidth = _props.cellWidth;
-      var cellPadding = _props.cellPadding;
       var columns = _props.columns;
       var children = _props.children;
+      var horizontalSpacing = _props.horizontalSpacing;
       var style = _props.style;
       var variation = _props.variation;
+      var verticalSpacing = _props.verticalSpacing;
 
 
-      var renderChildren = _react2.default.Children.map(children, function (child) {
-        return _react2.default.cloneElement(child, { variation: variation });
-      });
+      var renderChildren = void 0;
+      if (variation === 'irregular') {
+        renderChildren = getIrregularChildren(children, columns, variation);
+      } else {
+        renderChildren = _react2.default.Children.map(children, function (child) {
+          return _react2.default.cloneElement(child, { variation: variation });
+        });
+      }
 
       return _react2.default.createElement(
         _Grid2.default,
         {
           maxCols: columns,
           cellHeight: cellHeight,
-          cellPadding: cellPadding,
+          verticalSpacing: verticalSpacing,
+          horizontalSpacing: horizontalSpacing,
           cellWidth: cellWidth,
           style: (0, _stylePropable.mergeStyles)(styles.root, style)
         },
@@ -85,6 +130,8 @@ TapableGrid.propTypes = {
   cellHeight: number,
   cellWidth: number,
   cellPadding: number,
-  style: string
+  style: string,
+  verticalSpacing: number,
+  horizontalSpacing: number
 };
 exports.default = TapableGrid;

@@ -68,6 +68,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var string = _react.PropTypes.string;
 var object = _react.PropTypes.object;
+var oneOf = _react.PropTypes.oneOf;
+var bool = _react.PropTypes.bool;
 
 
 var getRelevantContextKeys = function getRelevantContextKeys(compTheme) {
@@ -75,24 +77,27 @@ var getRelevantContextKeys = function getRelevantContextKeys(compTheme) {
   return _extends({}, hmTheme);
 };
 
-var getStyles = function getStyles(themeAndConfig) {
+var getStyles = function getStyles(themeAndConfig, props) {
   var compTheme = themeAndConfig.compTheme;
+  var splitView = props.splitView;
+  var textPosition = props.textPosition;
+  var iconPosition = props.iconPosition;
+
+
+  var textOrder = textPosition === 'top' || textPosition === 'left' ? 1 : 2;
+  var imgOrder = textOrder === 1 ? 2 : 1;
 
   var heroMovie = getRelevantContextKeys(compTheme);
   return {
     root: {
       position: 'relative',
-      width: 960,
-      height: 500,
-      borderColor: heroMovie.borderColor,
-      borderWidth: '1',
-      padding: '1',
-      borderStyle: 'solid',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      display: 'flex',
+      flexDirection: splitView ? 'row' : 'column'
     },
     youtubeVideoSize: {
-      width: 960,
-      height: 500
+      width: 'auto',
+      height: 300
     },
     modalBodyStyle: {
       backgroundColor: 'transparent'
@@ -103,10 +108,11 @@ var getStyles = function getStyles(themeAndConfig) {
     },
     playIconContainer: {
       position: 'absolute',
-      right: 20,
-      width: 60,
-      top: 20,
-      margin: 0
+      margin: '3px 0px',
+      left: iconPosition.indexOf('left') > -1 ? 0 : 'initial',
+      right: iconPosition.indexOf('right') > -1 ? 0 : 'initial',
+      bottom: iconPosition.indexOf('bottom') > -1 ? 0 : 'initial',
+      top: iconPosition.indexOf('top') > -1 ? 0 : 'initial'
     },
     playIconTextStyle: {
       color: heroMovie.iconTextColor || 'white',
@@ -114,15 +120,37 @@ var getStyles = function getStyles(themeAndConfig) {
       fontFamily: heroMovie.fontFamily
     },
     iconButtonStyle: {
-      position: 'relative',
-      backgroundColor: heroMovie.iconBackground || 'rgba(255, 255, 255, 0.6)',
-      height: 60,
-      width: '100%',
-      padding: '0px',
+      padding: 5,
+      backgroundColor: '#000',
+      height: !splitView ? 50 : 25,
+      width: !splitView ? 50 : 25,
       textAlign: 'center'
+    },
+    iconImage: {
+      maxHeight: '60%',
+      maxWidth: '60%'
     },
     iconHoverStyle: {
       backgroundColor: heroMovie.iconHoverColor || 'rgba(255, 0, 0, .6)'
+    },
+    thumbnail: {
+      order: imgOrder,
+      position: 'relative',
+      padding: '4%',
+      flex: 1
+    },
+    imageWrapper: {
+      position: 'relative'
+    },
+    description: {
+      order: textOrder,
+      fontSize: 16,
+      margin: 'auto',
+      paddingBottom: textOrder === 2 && !splitView ? '4%' : 0,
+      paddingTop: textOrder === 1 && !splitView ? '4%' : 0,
+      paddingRight: textOrder === 2 || !splitView ? '4%' : 0,
+      paddingLeft: textOrder === 1 || !splitView ? '4%' : 0,
+      flex: splitView ? 1.5 : 1
     }
   };
 };
@@ -136,7 +164,7 @@ var getIconElement = function getIconElement(styles, iconSrc) {
   return _react2.default.createElement(
     _Button2.default,
     buttonProps,
-    _react2.default.createElement(_Image2.default, { source: iconSrc })
+    _react2.default.createElement(_Image2.default, { source: iconSrc, style: styles.iconImage })
   );
 };
 
@@ -177,13 +205,17 @@ var HeroMovie = function (_Component) {
       var imageSrc = _props.imageSrc;
       var imageTitle = _props.imageTitle;
       var videoId = _props.videoId;
-      var text = _props.text;
+      var iconText = _props.iconText;
+      var description = _props.description;
+
 
       var rootId = id;
-      var styles = getStyles(this.themeAndConfig);
+      var styles = getStyles(this.themeAndConfig, this.props);
       var iconElement = getIconElement(styles, iconSrc);
       var rootStyle = (0, _stylePropable.mergeStyles)(styles.root, style);
       var iconTextStyle = (0, _stylePropable.mergeStyles)(styles.playIconContainer, playButtonStyle);
+      var descriptionStyle = styles.description;
+      var thumbnailStyle = styles.thumbnail;
 
       return _react2.default.createElement(
         'div',
@@ -193,23 +225,31 @@ var HeroMovie = function (_Component) {
           className: className,
           onClick: this.handleClickEvent
         },
+        description && _react2.default.createElement(_Text2.default, {
+          style: descriptionStyle,
+          content: description
+        }),
         _react2.default.createElement(
           'div',
-          { style: iconTextStyle },
-          iconElement,
-          _react2.default.createElement(_Text2.default, {
-            style: styles.playIconTextStyle,
-            content: text
-          })
-        ),
-        _react2.default.createElement(
-          'h1',
-          null,
-          _react2.default.createElement(_Image2.default, {
-            source: imageSrc,
-            alternateText: imageTitle,
-            style: styles.image
-          })
+          { style: thumbnailStyle },
+          _react2.default.createElement(
+            'h1',
+            { style: styles.imageWrapper },
+            _react2.default.createElement(
+              'div',
+              { style: iconTextStyle },
+              iconElement,
+              _react2.default.createElement(_Text2.default, {
+                style: styles.playIconTextStyle,
+                content: iconText
+              })
+            ),
+            _react2.default.createElement(_Image2.default, {
+              source: imageSrc,
+              alternateText: imageTitle,
+              style: styles.image
+            })
+          )
         ),
         showVideo ? _react2.default.createElement(
           _Modal2.default,
@@ -231,11 +271,20 @@ HeroMovie.propTypes = {
   imageTitle: string,
   playButtonStyle: object,
   style: object,
-  text: string,
-  videoId: string.isRequired
+  iconText: string,
+  videoId: string.isRequired,
+  splitView: bool,
+  iconPosition: oneOf(['left-top', 'left-bottom', 'right-top', 'right-bottom', 'center']),
+  variation: oneOf(['mobile', 'desktop']),
+  textPosition: oneOf(['top', 'bottom', 'right', 'left']),
+  description: string
 };
 HeroMovie.contextTypes = {
   compTheme: object,
   compConfig: object
+};
+HeroMovie.defaultProps = {
+  iconPosition: 'left-bottom',
+  variation: 'mobile'
 };
 exports.default = (0, _contextPure2.default)(HeroMovie);

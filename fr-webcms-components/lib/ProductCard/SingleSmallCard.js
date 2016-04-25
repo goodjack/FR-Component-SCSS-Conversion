@@ -126,7 +126,7 @@ var prepareStyle = function prepareStyle(props, context) {
     SingleSmallProductDescription: {
       float: 'left',
       width: '50%',
-      marginLeft: '12'
+      marginLeft: '10'
     },
     SingleSmallProductName: {
       fontSize: '14',

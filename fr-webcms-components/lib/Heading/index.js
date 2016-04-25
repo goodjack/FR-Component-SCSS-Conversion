@@ -61,8 +61,7 @@ var Heading = function Heading(_ref, context) {
   var compType = type || 'h1';
   var compId = id || _uniqueId2.default.generate();
   var compStyles = {
-    color: textColor,
-    display: 'inline'
+    color: textColor
   };
 
   var headingProps = {

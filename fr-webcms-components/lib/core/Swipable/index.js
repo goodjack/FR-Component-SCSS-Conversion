@@ -14,6 +14,14 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _Image = require('../Image');
+
+var _Image2 = _interopRequireDefault(_Image);
+
+var _Null = require('../Null');
+
+var _Null2 = _interopRequireDefault(_Null);
+
 var _stylePropable = require('../../helpers/utils/stylePropable');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -29,6 +37,7 @@ var object = _react.PropTypes.object;
 var number = _react.PropTypes.number;
 var func = _react.PropTypes.func;
 var bool = _react.PropTypes.bool;
+var string = _react.PropTypes.string;
 
 var totalWidth = void 0;
 
@@ -61,7 +70,8 @@ var prepareStyle = function prepareStyle(me) {
       height: '100%',
       display: 'flex',
       flexFlow: 'column nowrap',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      position: 'relative'
     },
     swipeItem: {
       width: !pan ? 100 / display + '%' : 'auto',
@@ -70,6 +80,45 @@ var prepareStyle = function prepareStyle(me) {
   };
 
   return styles;
+};
+
+var getNavigation = function getNavigation(me) {
+  var _me$props2 = me.props;
+  var nextIcon = _me$props2.nextIcon;
+  var previousIcon = _me$props2.previousIcon;
+  var nextStyle = _me$props2.nextStyle;
+  var previousStyle = _me$props2.previousStyle;
+
+  var navigation = {
+    next: _Null2.default,
+    previous: _Null2.default
+  };
+  var mergedNext = (0, _stylePropable.mergeStyles)({
+    position: 'absolute',
+    width: '30px',
+    height: '35px',
+    top: '40%',
+    right: 0,
+    zIndex: 5
+  }, nextStyle);
+  var mergedPrevous = (0, _stylePropable.mergeStyles)({
+    position: 'absolute',
+    width: '30px',
+    height: '35px',
+    top: '40%',
+    left: 0,
+    zIndex: 5
+  }, previousStyle);
+  var index = me.state.selectedIndex;
+  if (nextIcon && me.props.children.length - 1 > index) {
+    navigation.next = _react2.default.createElement(_Image2.default, { source: nextIcon, onClick: me.goNext, style: mergedNext });
+  }
+
+  if (previousIcon && index > 0) {
+    navigation.previous = _react2.default.createElement(_Image2.default, { source: previousIcon, onClick: me.goPrevious, style: mergedPrevous });
+  }
+
+  return navigation;
 };
 
 var selectIndex = function selectIndex(me, selectedIndex) {
@@ -196,6 +245,10 @@ var Swipable = function (_Component) {
         clientX: null,
         animate: true
       }, _this.transitionTo(selectedIndex));
+    }, _this2.goNext = function () {
+      selectIndex(_this2, _this2.state.selectedIndex + 1);
+    }, _this2.goPrevious = function () {
+      selectIndex(_this2, _this2.state.selectedIndex - 1);
     }, _temp), _possibleConstructorReturn(_this2, _ret);
   }
 
@@ -214,7 +267,7 @@ var Swipable = function (_Component) {
       var children = _this.children;
       children = Array.isArray(children) ? children : [children];
       var rootStyle = (0, _stylePropable.mergeStyles)(swipeContainer, _this.props.style);
-
+      var navigation = getNavigation(_this);
       return _react2.default.createElement(
         'div',
         { style: rootStyle },
@@ -235,7 +288,10 @@ var Swipable = function (_Component) {
               child
             );
           })
-        )
+        ),
+        navigation.previous,
+        ' ',
+        navigation.next
       );
     }
   }]);
@@ -250,7 +306,11 @@ Swipable.propTypes = {
   onIndexChange: func,
   display: number,
   pan: bool,
-  speed: number
+  speed: number,
+  leftNavIcon: string,
+  rightNavIcon: string,
+  nextStyle: object,
+  previousStyle: object
 };
 Swipable.defaultProps = {
   display: 1,

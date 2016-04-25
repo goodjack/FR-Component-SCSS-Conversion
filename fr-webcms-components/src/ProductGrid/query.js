@@ -1,6 +1,9 @@
-export const query = function query(categoryId) {
+export const query = function query(categoryId, productIds) {
+  const queryString = productIds ? 'list' : 'search';
+  const queryData = productIds ? 'productID' : 'category';
+  const queryIds = productIds ? productIds : categoryId;
   return `query catalog {
-  search(category: "${categoryId}") {
+  ${queryString}(${queryData}: "${queryIds}") {
     total
     count
     items {

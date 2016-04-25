@@ -20,6 +20,10 @@ var _contextPure = require('../helpers/composedComponents/contextPure');
 
 var _contextPure2 = _interopRequireDefault(_contextPure);
 
+var _label = require('./label.scss');
+
+var _label2 = _interopRequireDefault(_label);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28,19 +32,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+//
+console.log(_label2.default.label);
+
 var string = _react.PropTypes.string;
 var object = _react.PropTypes.object;
-
-var styles = {
-  display: 'inline-block',
-  padding: 5,
-  backgroundColor: 'transparent',
-  color: 'black',
-  fontSize: '10px',
-  lineHeight: '15px',
-  margin: 2,
-  textAlign: 'center'
-};
 
 var Label = function (_Component) {
   _inherits(Label, _Component);
@@ -68,7 +64,7 @@ var Label = function (_Component) {
       var text = _props.text;
 
       var inputId = id || this._uniqueId;
-      var labelStyle = _stylePropable.mergeStyles.apply(this, [styles, style]);
+      var labelStyle = _stylePropable.mergeStyles.apply(this, [style]);
       if (background) {
         labelStyle = _stylePropable.mergeStyles.apply(this, [labelStyle, { backgroundColor: background }]);
       }
@@ -81,7 +77,7 @@ var Label = function (_Component) {
         'div',
         {
           id: inputId,
-          className: className,
+          className: 'label',
           style: labelStyle
         },
         text

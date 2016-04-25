@@ -36,15 +36,20 @@ const prepareStyle = ({ context, props, state }) => {
     labelStyle: {
       fontSize: 15,
     },
+    anchor: {
+      display: 'block',
+      lineHeight: 0,
+    },
   };
 
   let buttonStyle = mergeStyles.apply(this, [styles.button, props.style]);
+  const anchorStyle = mergeStyles.apply(this, [styles.anchor, props.linkStyle]);
   if (props.hoverStyle && state.hovered) {
     buttonStyle = mergeStyles.apply(this, [styles.button, props.style, props.hoverStyle]);
   }
 
   const styleLabel = mergeStyles.apply(this, [styles.labelStyle, props.labelStyle]);
-  return { buttonStyle, styleLabel };
+  return { buttonStyle, styleLabel, anchorStyle };
 };
 
 class Button extends Component {
@@ -55,10 +60,13 @@ class Button extends Component {
    id: string,
    label: string,
    labelStyle: object,
+   link: string,
+   linkStyle: object,
    onMouseEnter: func,
    onMouseLeave: func,
    onTouchTap: func,
    style: object,
+   target: string,
    disabled: bool,
  };
 
@@ -98,18 +106,21 @@ class Button extends Component {
       id,
       disabled,
       children,
+      link,
+      target,
       ...other,
     } = this.props;
 
     const {
     buttonStyle,
     styleLabel,
+    anchorStyle,
   } = prepareStyle(this);
 
     const enhancedButtonChildren = children ? (children)
     : (<Text style={styleLabel}>{label}</Text>);
 
-    const ButtonProps = {
+    const buttonProps = {
       className,
       id,
       disabled,
@@ -118,12 +129,14 @@ class Button extends Component {
       onMouseEnter: this.handleMouseEnter,
       onMouseLeave: this.handleMouseLeave,
     };
-
-    return (
-      <button {...ButtonProps}>
-        {enhancedButtonChildren}
-      </button>
-    );
+    const anchorProps = {
+      style: anchorStyle,
+      href: link,
+      target,
+    };
+    const renderNode = (<button {...buttonProps}>{enhancedButtonChildren}</button>);
+    const linkNode = link ? (<a {...anchorProps}>{renderNode}</a>) : renderNode;
+    return (linkNode);
   }
 }
 

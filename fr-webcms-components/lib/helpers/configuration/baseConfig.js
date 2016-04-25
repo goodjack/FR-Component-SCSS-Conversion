@@ -47,5 +47,14 @@ exports.default = {
     subtitleLinesToShow: 3,
     textLinesToShow: 3,
     textOverlayMaxWidth: '50%'
+  },
+  instagram: {
+    instagramApiUrl: 'https://api.instagram.com/oembed/',
+    instagramImageUrl: 'http://instagr.am/p/',
+    captionLinesToShow: 3,
+    containerHeight: 350
+  },
+  overlay: {
+    containerHeight: 300
   }
 };

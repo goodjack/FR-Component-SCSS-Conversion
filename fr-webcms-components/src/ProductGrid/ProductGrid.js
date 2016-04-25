@@ -129,7 +129,7 @@ class ProductGrid extends Component {
     const pages = pageNo || 0;
     const productIds = products || '';
     const productUrl = catelogUrl;
-    const queryParameter = query(categoryId, pages, productIds);
+    const queryParameter = query(categoryId, productIds, pages);
     const queryData = {
       queryParameter,
       userName,
@@ -140,11 +140,12 @@ class ProductGrid extends Component {
     getApiDetail(queryData, this.successCall, this.errorCall);
   };
 
-  renderProductChildren(data = {}, language) {
+  renderProductChildren(data = {}, language, objString) {
     let ProductCards = [];
+    const itemData = data[objString];
     const { variationType, ratingLinkUrl } = this.props;
-    const items = data.search && data.search.items || [];
-    if (data.search && data.search.items) {
+    const items = itemData && itemData.items || [];
+    if (itemData && itemData.items) {
       ProductCards = items.map((pItem, index) => {
         const cardProps = Object.assign({}, language, {
           variationType,
@@ -167,12 +168,14 @@ class ProductGrid extends Component {
       children,
       style,
       variationType,
+      products,
       ...other,
     } = _this.props;
     const language = _this.context.language || LangConfig.productCard;
     const cols = _this.getCols(variationType);
     const productDetail = _this.state.productDetail;
     const gridStyle = mergeStyles.apply(_this, [styles.root, style]);
+    const searchString = products ? 'list' : 'search';
     return (
       <Grid
         maxCols={cols}
@@ -180,7 +183,7 @@ class ProductGrid extends Component {
         style={gridStyle}
         cellHeight={parseInt(cellHeight, 10)}
       >
-        {this.renderProductChildren(productDetail, language)}
+        {this.renderProductChildren(productDetail, language, searchString)}
         {this.getFillers(variationType)}
       </Grid>
     );
